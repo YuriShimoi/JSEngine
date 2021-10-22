@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Baloo 2', cursive;
+    font-size: large;
+}
+
+.drawer {
+    --drawer-background: white;
+    --drawer-padding: 10px;
+    --drawer-margin: 0px;
+    --drawer-border: 1px;
+    --drawer-border-color: #ddd;
+    --drawer-outer-space: calc(var(--drawer-padding) + var(--drawer-margin));
+
+    display: block;
+    background: var(--drawer-background);
+
+    padding: var(--drawer-padding);
+    margin: var(--drawer-margin);
+
+    border: var(--drawer-border) solid var(--drawer-border-color);
+    border-radius: 0px;
+}
+.drawer > button.drawer-close {
+    --drawer-close-width: fit-content;
+    --drawer-close-height: 30px;
+    --opened: 'X';
+    --closed: '+';
+
+    width: var(--drawer-close-width);
+    height: var(--drawer-close-height);
+    line-height: var(--drawer-close-height);
+
+    padding: 0 10px 0 7px;
+    position: relative;
+    margin-bottom: calc(var(--drawer-close-height) * -1);
+
+    border: 1px solid var(--drawer-border-color);
+    border-radius: 3px;
+
+    background: var(--drawer-background);
+    font-size: medium;
+    font-family: 'Baloo 2', cursive;
+    text-align: center;
+    cursor: pointer;
+}
+.drawer > button.drawer-close:before {
+    content: var(--opened);
+}
+.drawer.drawer-closed > button.drawer-close:before {
+    content: var(--closed);
+}
+
+.drawer-left,.drawer-right {
+    transform: translateX(0);
+    transition: transform ease 400ms;
+}
+
+.drawer-left {
+    height: calc(100% - calc(var(--drawer-outer-space) * 2));
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    float: left;
+}
+.drawer-left.drawer-closed {
+    transform: translateX(-100%);
+}
+.drawer-left > button.drawer-close {
+    left: calc(100% + calc(var(--drawer-outer-space) - var(--drawer-margin)));
+
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.drawer-right {
+    height: calc(100% - calc(var(--drawer-outer-space) * 2));
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    float: right;
+}
+.drawer-right.drawer-closed {
+    transform: translateX(100%);
+}
+.drawer-right > button.drawer-close {
+    float: right;
+    right: calc(100% + var(--drawer-outer-space));
+    
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}

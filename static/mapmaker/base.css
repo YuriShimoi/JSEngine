@@ -1,0 +1,25 @@
+#grid {
+    background: #eee;
+}
+
+.texture-drawer {
+    width: 20%;
+    max-width: 300px;
+    min-width: 200px;
+}
+h1, h2, h3 {
+    margin: 0 0 7px 0;
+    text-align: center;
+}
+
+#grid, #hud {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#grid {
+    text-align: center;
+}
