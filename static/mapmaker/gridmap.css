@@ -3,20 +3,74 @@
     height: 100%;
     display: flex;
     align-items: center;
-    text-align: center;
+    justify-content: center;
 }
 
 .gridmap-table {
-    display: table;
-    border: 1px solid red;
+    border: none;
+    border-collapse: collapse;
+}
+.gridmap-table td {
+    padding: 0;
 }
 
 .gridmap-grid {
+    --grid-zoom: 50px;
+    --grid-chess-trick-x: 0;
+    --grid-chess-trick-y: 0;
     display: block;
-    background: blue;
+    background: repeating-conic-gradient(#f5f5f5 0% 25%, #fff 0% 50%) 
+        calc(var(--grid-chess-trick-x) * 50px) calc(var(--grid-chess-trick-y) * 50px) /
+        calc(var(--grid-zoom) * 2) calc(var(--grid-zoom) * 2);
 }
 
 .gridmap-arrow {
+    --gridarrow-size: 20px;
+
+    text-align: center;
+    line-height: 100%;
+    cursor: pointer;
+    color: #aaa;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+
+    transition: all 200ms ease;
+}
+.gridmap-arrow:hover {
+    color: #222;
+    background: #fff;
+}
+
+.gridmap-arrow.gridmap-arrow-top::before {
     display: block;
-    background: greenyellow;
+    content: "▲";
+    height: var(--gridarrow-size);
+    line-height: calc(var(--gridarrow-size) + 3px);
+}
+
+.gridmap-arrow.gridmap-arrow-bottom::before {
+    display: block;
+    content: "▼";
+    height: var(--gridarrow-size);
+    line-height: calc(var(--gridarrow-size) + 3px);
+}
+
+.gridmap-arrow.gridmap-arrow-left::before {
+    display: block;
+    content: "◀";
+    width: var(--gridarrow-size);
+}
+
+.gridmap-arrow.gridmap-arrow-right::before {
+    display: block;
+    content: "▶";
+    width: var(--gridarrow-size);
+}
+
+.gridmap-grid .gridmap-gridtile {
+    position: relative;
+    display: block;
+    background: turquoise;
+    width: var(--grid-zoom);
+    height: var(--grid-zoom);
 }
