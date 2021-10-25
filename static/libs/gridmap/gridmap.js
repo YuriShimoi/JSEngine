@@ -137,8 +137,8 @@ class GridMap {
         if(dir.x == -1 || dir.y == -1) {
             this._internal.chessTrick(dir, amount, this._instance.querySelector(".gridmap-grid"));
             this._internal.reMap(dir, amount, this._mapping, this._zoom);
-            this._internal.removeOutOfGrid({x:this.sizeX, y:this.sizeY}, this._mapping);
         }
+        this._internal.removeOutOfGrid({x:this.sizeX, y:this.sizeY}, this._mapping);
         return true;
     }
 
