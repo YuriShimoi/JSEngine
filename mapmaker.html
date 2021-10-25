@@ -5,9 +5,15 @@
         <link rel="stylesheet" href="static/basic.css">
         <script src="static/basic.js"></script>
 
-        <link rel="stylesheet" href="static/mapmaker/gridmap.css">
+        <script src="static/libs/wakeupassist/wakeupassist.js"></script>
+
+        <link rel="stylesheet" href="static/libs/drawer/drawer.css">
+        <script src="static/libs/drawer/drawer.js"></script>
+
+        <link rel="stylesheet" href="static/libs/gridmap/gridmap.css">
+        <script src="static/libs/gridmap/gridmap.js"></script>
+
         <link rel="stylesheet" href="static/mapmaker/base.css">
-        <script src="static/mapmaker/gridmap.js"></script>
         <script src="static/mapmaker/base.js"></script>
         <title>Map Maker</title>
     </head>
@@ -16,13 +22,31 @@
             <div id="mapChess"></div>
         </div>
         <div id="hud">
-            <div class="drawer drawer-left drawer-closed texture-drawer">
-                <button class="drawer-close" style="--opened:'↩';--closed:'Textures'"></button>
-                <h3>Textures</h3>
+            <div class="drawer drawer-left tools-drawer">
+                <h3>Tools</h3>
+            </div>
+            <div class="multi-drawer drawer-left drawer-closed">
+                <div class="multi-drawer-bookmarks">
+                    <button class="drawer-bookmark" for="file-drawer" style="--opened:'↩';--closed:'Fls'"></button>
+                    <button class="drawer-bookmark" for="texture-drawer" style="--opened:'↩';--closed:'Txr'"></button>
+                    <button class="drawer-bookmark" for="export-drawer" style="--opened:'↩';--closed:'Cod'"></button>
+                </div>
+                
+                <div class="drawer" id="file-drawer">
+                    <h3>Files</h3>
+    
+                </div>
+                <div class="drawer" id="texture-drawer">
+                    <h3>Textures</h3>
+    
+                </div>
 
+                <div class="drawer" id="export-drawer">
+                    <h3>Code Export</h3>
+    
+                </div>
             </div>
 
-            
         </div>
     </body>
 </html>
