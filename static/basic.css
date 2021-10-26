@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
 
 :root {
+    --hr-color: #ddd;
     --page-color: #222;
     --input-border: lightgray;
     --input-color: #555;
@@ -25,6 +26,7 @@ a {
 
 hr {
     border-style: solid;
+    border-color: var(--hr-color);
     border-bottom: none;
 }
 
@@ -34,9 +36,13 @@ button, input, textarea {
     color: var(--input-color);
     border-radius: 1px;
 }
+button, input {
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+}
 
 button {
-    padding: 5px 10px;
     transition: background ease 150ms, color ease 150ms;
 }
 button:hover {

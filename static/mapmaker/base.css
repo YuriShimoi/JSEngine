@@ -104,3 +104,30 @@ h1, h2, h3 {
     height: 150px;
     max-height: 400px;
 }
+
+#texture-input {
+    display: none;
+}
+label.texture-input-span {
+    border: solid 1px var(--input-border);
+    background: var(--input-background);
+    color: var(--input-color);
+    border-radius: 1px;
+
+    width: calc(100% - 2px);
+    height: 23px;
+    line-height: 25px;
+    padding: 0;
+    display: block;
+    text-align: center;
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+label.texture-input-span:hover {
+    background: var(--button-background-hover);
+    color: var(--button-color-hover);
+}
+label.texture-input-span:active {
+    background: var(--button-background-active);
+}
