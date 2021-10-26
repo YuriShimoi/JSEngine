@@ -7,6 +7,7 @@
 
 h1, h2, h3 {
     margin: 0 0 7px 0;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -95,4 +96,11 @@ h1, h2, h3 {
 }
 #tools-drawer a:hover {
     color: var(--tool-hover-color);
+}
+
+#code-export-area {
+    resize: vertical;
+    min-height: 150px;
+    height: 150px;
+    max-height: 400px;
 }

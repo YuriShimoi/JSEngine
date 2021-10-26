@@ -4,9 +4,10 @@
     --tool-color: #777;
     --tool-hover-color: #fff;
 
-    --button-border: #3f3f3f;
-    --button-color: #ccc;
-    --button-background: #333;
+    --input-border: #3f3f3f;
+    --input-color: #ccc;
+    --input-placeholder-color: #666;
+    --input-background: #333;
     --button-color-hover: #fff;
     --button-background-hover: #222;
     --button-background-active: #111;

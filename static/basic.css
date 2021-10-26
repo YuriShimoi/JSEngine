@@ -2,9 +2,10 @@
 
 :root {
     --page-color: #222;
-    --button-border: lightgray;
-    --button-color: #555;
-    --button-background: white;
+    --input-border: lightgray;
+    --input-color: #555;
+    --input-placeholder-color: #ccc;
+    --input-background: white;
     --button-color-hover: #333;
     --button-background-hover: #f5f5f5;
     --button-background-active: #eee;
@@ -27,13 +28,15 @@ hr {
     border-bottom: none;
 }
 
+button, input, textarea {
+    border: solid 1px var(--input-border);
+    background: var(--input-background);
+    color: var(--input-color);
+    border-radius: 1px;
+}
+
 button {
     padding: 5px 10px;
-    border: solid 1px var(--button-border);
-    background: var(--button-background);
-    color: var(--button-color);
-    border-radius: 1px;
-
     transition: background ease 150ms, color ease 150ms;
 }
 button:hover {
@@ -44,7 +47,7 @@ button:active {
     background: var(--button-background-active);
 }
 
-button, a, input {
+button, a, input, textarea {
     outline: none;
 }
 
@@ -55,4 +58,15 @@ h1, h2, h3, h4, h5 {
 button.btn-block {
     display: block;
     width: 100%;
+}
+
+textarea {
+    margin: 10px 0;
+    display: block;
+    width: 100%;
+    resize: none;
+}
+
+textarea::placeholder, input::placeholder {
+    color: var(--input-placeholder-color);
 }
