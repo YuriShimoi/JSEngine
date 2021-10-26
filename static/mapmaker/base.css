@@ -1,3 +1,10 @@
+:root {
+    --page-background: #eee;
+    --page-color: #222;
+    --tool-color: #aaa;
+    --tool-hover-color: #222;
+}
+
 h1, h2, h3 {
     margin: 0 0 7px 0;
     text-align: center;
@@ -11,28 +18,13 @@ h1, h2, h3 {
     padding: 0;
 }
 
-.tools-drawer {
-    z-index: 10;
-    position: relative;
-}
 
-#file-drawer {
-    z-index: 2;
-    width: 30%;
-    max-width: 300px;
-    min-width: 200px;
-}
-#texture-drawer {
-    z-index: 2;
-    width: 30%;
-    max-width: 300px;
-    min-width: 200px;
-}
-#export-drawer {
-    z-index: 2;
-    width: 30%;
-    max-width: 300px;
-    min-width: 200px;
+
+/* =-=-= GRID =-=-= */
+#grid {
+    background: var(--page-background);
+    color: var(--page-color);
+    text-align: center;
 }
 
 
@@ -45,10 +37,62 @@ h1, h2, h3 {
     pointer-events: auto;
 }
 
+#dark-theme {
+    filter: brightness(1.6);
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    padding: 0;
+    font-size: 18px;
+    cursor: pointer;
+}
+#dark-theme:before {
+    filter: saturate(0);
+    content: "🌙";
+}
+#dark-theme.dark-active:before {
+    filter: saturate(0);
+    content: "🌕";
+}
 
+#page-drawers {
+    z-index: 2;
+    width: 30%;
+    max-width: 300px;
+    min-width: 200px;
+}
 
-/* =-=-= GRID =-=-= */
-#grid {
-    background: #eee;
+#tools-drawer {
+    --tool-color-transition: color 200ms ease;
+    z-index: 10;
+    width: 30px;
+    color: var(--tool-color);
+    overflow: hidden;
+    position: relative;
     text-align: center;
+}
+
+#tools-drawer hr {
+    margin-left: -5px;
+    margin-right: -5px;
+    border-color: lightgray;
+}
+
+#tools-drawer a {
+    display: inline-block;
+    color: var(--tool-color);
+    width: calc(100% + 20px);
+    margin: -10px -10px;
+    padding: 10px 0;
+    transition: var(--tool-color-transition);
+}
+#tools-drawer a:visited {
+    color: var(--tool-color);
+}
+#tools-drawer a:hover {
+    color: var(--tool-hover-color);
 }

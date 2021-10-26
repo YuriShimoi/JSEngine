@@ -1,8 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
 
+:root {
+    --page-color: #222;
+    --button-border: lightgray;
+    --button-color: #555;
+    --button-background: white;
+    --button-color-hover: #333;
+    --button-background-hover: #f5f5f5;
+    --button-background-active: #eee;
+}
+
 html, body {
     padding: 0;
     margin: 0;
     font-family: 'Baloo 2', cursive;
     font-size: large;
+    color: var(--page-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+hr {
+    border-style: solid;
+    border-bottom: none;
+}
+
+button {
+    padding: 5px 10px;
+    border: solid 1px var(--button-border);
+    background: var(--button-background);
+    color: var(--button-color);
+    border-radius: 1px;
+
+    transition: background ease 150ms, color ease 150ms;
+}
+button:hover {
+    background: var(--button-background-hover);
+    color: var(--button-color-hover);
+}
+button:active {
+    background: var(--button-background-active);
+}
+
+button, a, input {
+    outline: none;
+}
+
+h1, h2, h3, h4, h5 {
+    color: var(--page-color);
+}
+
+button.btn-block {
+    display: block;
+    width: 100%;
 }

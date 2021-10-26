@@ -48,6 +48,14 @@ class GridMap {
             let generatedGrid = document.createElement("div");
             generatedGrid.classList.add("gridmap-grid");
 
+            let gridMapCursor = document.createElement("div");
+            gridMapCursor.classList.add("gridmap-cursor");
+            generatedGrid.append(gridMapCursor);
+            generatedGrid.setAttribute("onmousemove",  "GridMapHandler.cursor('move',  event, this)");
+            generatedGrid.setAttribute("onmousedown",  "GridMapHandler.cursor('down',  event, this)");
+            generatedGrid.setAttribute("onmouseup",    "GridMapHandler.cursor('up',    event, this)");
+            generatedGrid.setAttribute("onmouseleave", "GridMapHandler.cursor('leave', event, this)");
+
             this.reZoom(size, 50, mapping, generatedGrid);
             this.removeOutOfGrid(size, mapping);
 
@@ -87,11 +95,11 @@ class GridMap {
         static chessTrick(dir, amount, gridInstance) {
             if(dir.x == -1) {
                 let lastChessTrick = parseInt(window.getComputedStyle(gridInstance).getPropertyValue("--grid-chess-trick-x"));
-                gridInstance.style.setProperty("--grid-chess-trick-x", (lastChessTrick + amount) % 2);
+                gridInstance.style.setProperty("--grid-chess-trick-x", (lastChessTrick + amount));
             }
             if(dir.y == -1) {
                 let lastChessTrick = parseInt(window.getComputedStyle(gridInstance).getPropertyValue("--grid-chess-trick-y"));
-                gridInstance.style.setProperty("--grid-chess-trick-y", (lastChessTrick + amount) % 2);
+                gridInstance.style.setProperty("--grid-chess-trick-y", (lastChessTrick + amount));
             }
         }
 
@@ -172,7 +180,8 @@ class GridMap {
 
 class GridMapHandler {
     static _instanceHolder = {};
-    static arrow(e) {
+
+    static getElementGridMapInstance(e) {
         let findParentGridContent = (childElement) => {
             let foundParent = childElement.parentElement;
 
@@ -188,16 +197,50 @@ class GridMapHandler {
             console.warn("Element has no valid gridmap parent.");
             return null;
         }
+        
+        return this._instanceHolder[parentGridContent.getAttribute("uuid")];
+    }
+
+    static arrow(e) {
+        let parentInstance = this.getElementGridMapInstance(e);
 
         let dir = {x:0, y:0};
         if(e.classList.contains("gridmap-arrow-left"))   dir.x = -1;
         if(e.classList.contains("gridmap-arrow-right"))  dir.x =  1;
         if(e.classList.contains("gridmap-arrow-top"))    dir.y = -1;
         if(e.classList.contains("gridmap-arrow-bottom")) dir.y =  1;
-        console.log(dir);
-        
-        let parentInstance = this._instanceHolder[parentGridContent.getAttribute("uuid")];
         
         parentInstance.resize(dir);
+    }
+
+    static cursor(type, event, element) {
+        let gridMapCursor = element.getElementsByClassName("gridmap-cursor")[0];
+        let gridMapInstance = this.getElementGridMapInstance(element);
+        let gridMapCursorPos;
+        switch(type) {
+            case "move":
+                let cursorBorderSize = parseInt(window.getComputedStyle(gridMapCursor).getPropertyValue("--cursor-border").replace("px","")) / 2;
+                gridMapCursorPos = {
+                    x: event.offsetX - (event.offsetX % gridMapInstance._zoom) - cursorBorderSize,
+                    y: event.offsetY - (event.offsetY % gridMapInstance._zoom) - cursorBorderSize
+                }
+                gridMapCursor.style.left = `${gridMapCursorPos.x}px`;
+                gridMapCursor.style.top = `${gridMapCursorPos.y}px`;
+                break;
+            case "down":
+
+                break;
+            case "up":
+
+                break;
+            case "leave":
+                gridMapCursorPos = {
+                    x: gridMapInstance._zoom * -2,
+                    y: gridMapInstance._zoom * -2
+                }
+                gridMapCursor.style.left = `${gridMapCursorPos.x}px`;
+                gridMapCursor.style.top = `${gridMapCursorPos.y}px`;
+                break;
+        }
     }
 }

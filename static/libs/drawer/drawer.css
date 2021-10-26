@@ -1,10 +1,13 @@
+:root {
+    --drawer-background: white;
+    --drawer-border-color: #ddd;
+}
+
 .multi-drawer,
 .drawer {
-    --drawer-background: white;
     --drawer-padding: 10px;
     --drawer-margin: 0px;
     --drawer-border: 1px;
-    --drawer-border-color: #ddd;
     --drawer-outer-space: calc(var(--drawer-padding) + var(--drawer-margin));
 
     display: block;
@@ -36,7 +39,7 @@
 
     background: var(--drawer-background);
     font-size: medium;
-    font-family: 'Baloo 2', cursive;
+    font-family: monospace;
     text-align: center;
     cursor: pointer;
 }

@@ -1,0 +1,32 @@
+[dark-theme="true"] {
+    --page-background: #333;
+    --page-color: #fff;
+    --tool-color: #777;
+    --tool-hover-color: #fff;
+
+    --button-border: #3f3f3f;
+    --button-color: #ccc;
+    --button-background: #333;
+    --button-color-hover: #fff;
+    --button-background-hover: #222;
+    --button-background-active: #111;
+    
+    --drawer-background: #222;
+    --drawer-border-color: #444;
+    
+    --gridmap-primary-black: #eee;
+    --gridmap-primary-gray: #444;
+    --gridmap-secondary-gray: #777;
+    --gridmap-primary-white: #171717;
+    --gridmap-secondary-white: #222;
+    --gridmap-highlight: #0051ff;
+    --gridmap-placehold-color: turquoise;
+    
+    --gridmap-tile-background: var(--gridmap-placehold-color);
+    --gridmap-cursor-color: var(--gridmap-highlight);
+    --gridmap-background: var(--gridmap-primary-white);
+    --gridmap-disabled-background: var(--gridmap-secondary-white);
+    --gridmap-border: var(--gridmap-primary-gray);
+    --gridmap-color: var(--gridmap-primary-black);
+    --gridmap-disabled-color: var(--gridmap-secondary-gray);
+}

@@ -15,6 +15,7 @@
 
         <!-- PAGE BASE -->
         <link rel="stylesheet" href="static/mapmaker/base.css">
+        <link rel="stylesheet" href="static/mapmaker/themes.css">
         <script src="static/mapmaker/base.js"></script>
     </head>
     <body>
@@ -22,20 +23,18 @@
             <div id="mapChess"></div>
         </div>
         <div id="hud">
-            <div class="drawer drawer-left tools-drawer">
-                <h3>Tools</h3>
+            <div id="tools-drawer" class="drawer drawer-left">
+                <a href="index.html" onclick="return confirm('Leave page? You will lost all progress.')">◀</a>
+                <hr>
+                
             </div>
-            <div class="multi-drawer drawer-left drawer-closed">
+
+            <div id="page-drawers" class="multi-drawer drawer-left drawer-closed">
                 <div class="multi-drawer-bookmarks">
-                    <button class="drawer-bookmark" for="file-drawer" style="--opened:'↩';--closed:'Fls'"></button>
                     <button class="drawer-bookmark" for="texture-drawer" style="--opened:'↩';--closed:'Txr'"></button>
                     <button class="drawer-bookmark" for="export-drawer" style="--opened:'↩';--closed:'Cod'"></button>
                 </div>
                 
-                <div class="drawer" id="file-drawer">
-                    <h3>Files</h3>
-    
-                </div>
                 <div class="drawer" id="texture-drawer">
                     <h3>Textures</h3>
     
@@ -43,10 +42,11 @@
 
                 <div class="drawer" id="export-drawer">
                     <h3>Code Export</h3>
-    
+                    <button class="btn-block">Quick Run ▷</button>
                 </div>
             </div>
 
+            <button id="dark-theme"></button>
         </div>
     </body>
 </html>
