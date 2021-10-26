@@ -8,6 +8,8 @@
 
         <!-- INTERNAL LIBS -->
         <script src="static/libs/wakeupassist/wakeupassist.js"></script>
+        <link rel="stylesheet" href="static/libs/imageloader/imageloader.css">
+        <script src="static/libs/imageloader/imageloader.js"></script>
         <link rel="stylesheet" href="static/libs/drawer/drawer.css">
         <script src="static/libs/drawer/drawer.js"></script>
         <link rel="stylesheet" href="static/libs/gridmap/gridmap.css">
@@ -31,15 +33,21 @@
 
             <div id="page-drawers" class="multi-drawer drawer-left drawer-closed">
                 <div class="multi-drawer-bookmarks">
-                    <button class="drawer-bookmark" for="texture-drawer" style="--opened:'↩';--closed:'Tsr'"></button>
-                    <button class="drawer-bookmark" for="export-drawer" style="--opened:'↩';--closed:'CdE'"></button>
+                    <button class="drawer-bookmark" for="file-drawer" style="--opened:'↩';--closed:'Fls'"></button>
+                    <button class="drawer-bookmark" for="tilemap-drawer" style="--opened:'↩';--closed:'Tlm'"></button>
+                    <button class="drawer-bookmark" for="export-drawer" style="--opened:'↩';--closed:'Cde'"></button>
                 </div>
                 
-                <div class="drawer" id="texture-drawer">
-                    <h3>Textures</h3>
-                    <label class="texture-input-span" for="texture-input">Load Image</label>
-                    <input type="file" id="texture-input" accept="image/png, image/jpeg,, image/jpg">
-                    
+                <div class="drawer" id="file-drawer">
+                    <h3>Files</h3>
+                    <label class="file-input-span" for="file-input">Load Image</label>
+                    <input type="file" id="file-input" accept="image/png, image/jpeg, image/jpg" multiple>
+                    <div class="imageloader" for="file-input"></div>
+                </div>
+
+                <div class="drawer" id="tilemap-drawer">
+                    <h3>Tile Maps</h3>
+                    <button class="btn-block">New Tile Map</button>
                 </div>
 
                 <div class="drawer" id="export-drawer">

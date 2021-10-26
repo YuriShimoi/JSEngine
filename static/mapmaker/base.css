@@ -105,10 +105,10 @@ h1, h2, h3 {
     max-height: 400px;
 }
 
-#texture-input {
+#file-input {
     display: none;
 }
-label.texture-input-span {
+label.file-input-span {
     border: solid 1px var(--input-border);
     background: var(--input-background);
     color: var(--input-color);
@@ -122,12 +122,12 @@ label.texture-input-span {
     text-align: center;
     font-size: small;
     font-family: Arial, Helvetica, sans-serif;
-    cursor: pointer;
+    margin-bottom: 10px;
 }
-label.texture-input-span:hover {
+label.file-input-span:hover {
     background: var(--button-background-hover);
     color: var(--button-color-hover);
 }
-label.texture-input-span:active {
+label.file-input-span:active {
     background: var(--button-background-active);
 }
