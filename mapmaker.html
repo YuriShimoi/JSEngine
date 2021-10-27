@@ -7,14 +7,22 @@
         <link rel="stylesheet" href="static/basic.css">
         <script src="static/basic.js"></script>
 
+
         <!-- INTERNAL LIBS -->
         <script src="libs/wakeupassist/wakeupassist.js"></script>
+
+        <link rel="stylesheet" href="libs/floatercontainer/floatercontainer.css">
+        <script src="libs/floatercontainer/floatercontainer.js"></script>
+
         <link rel="stylesheet" href="libs/imageloader/imageloader.css">
         <script src="libs/imageloader/imageloader.js"></script>
+
         <link rel="stylesheet" href="libs/drawer/drawer.css">
         <script src="libs/drawer/drawer.js"></script>
+
         <link rel="stylesheet" href="libs/gridmap/gridmap.css">
         <script src="libs/gridmap/gridmap.js"></script>
+
 
         <!-- PAGE BASE -->
         <link rel="stylesheet" href="static/mapmaker/base.css">
@@ -48,13 +56,15 @@
 
                 <div class="drawer" id="tilemap-drawer">
                     <h3>Tile Maps</h3>
-                    <button class="btn-block">New Tile Map</button>
-
+                    <button class="btn-block" onclick="toggleTileMapWindow()">New Tile Map</button>
+                    <div id="tilemap-window" class="floatercontainer drawer" hidden>
+                        testeee
+                    </div>
                 </div>
 
                 <div class="drawer" id="export-drawer">
                     <h3>Code Export</h3>
-                    <button class="btn-block">Quick Run ▷</button>
+                    <button class="btn-block">Spectate Map ▷</button>
                     <textarea id="code-export-area" placeholder="code to export"></textarea>
                 </div>
             </div>

@@ -134,3 +134,10 @@ label.file-input-span:hover {
 label.file-input-span:active {
     background: var(--button-background-active);
 }
+
+#tilemap-window {
+    width: 70%;
+    height: 80%;
+    max-width: 600px;
+    max-height: 700px;
+}

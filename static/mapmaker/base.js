@@ -11,3 +11,7 @@ documentReady(() => {
         document.body.setAttribute("dark-theme", darkThemeBtn.classList.contains("dark-active"));
     });
 });
+
+function toggleTileMapWindow() {
+    document.getElementById("tilemap-window").toggleAttribute("hidden");
+}
