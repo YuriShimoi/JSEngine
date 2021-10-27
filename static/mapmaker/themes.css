@@ -1,26 +1,26 @@
 [dark-theme="true"] {
     --hr-color: #444;
-    --page-background: #333;
+    --page-background: #222;
     --page-color: #fff;
     --tool-color: #777;
     --tool-hover-color: #fff;
 
-    --input-border: #3f3f3f;
+    --input-border: #090909;
     --input-color: #ccc;
     --input-placeholder-color: #666;
-    --input-background: #333;
+    --input-background: #222;
     --button-color-hover: #fff;
-    --button-background-hover: #222;
+    --button-background-hover: #151515;
     --button-background-active: #111;
     
-    --drawer-background: #222;
-    --drawer-border-color: #444;
+    --drawer-background: #1a1a1a;
+    --drawer-border-color: #090909;
     
     --gridmap-primary-black: #eee;
-    --gridmap-primary-gray: #444;
+    --gridmap-primary-gray: #090909;
     --gridmap-secondary-gray: #777;
-    --gridmap-primary-white: #171717;
-    --gridmap-secondary-white: #222;
+    --gridmap-primary-white: #151515;
+    --gridmap-secondary-white: #1a1a1a;
     --gridmap-highlight: #0051ff;
     --gridmap-placehold-color: turquoise;
     

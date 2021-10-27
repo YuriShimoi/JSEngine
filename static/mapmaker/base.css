@@ -39,7 +39,7 @@ h1, h2, h3 {
 }
 
 #dark-theme {
-    filter: brightness(1.6);
+    filter: saturate(0);
     position: absolute;
     right: 5px;
     top: 5px;
@@ -52,11 +52,11 @@ h1, h2, h3 {
     cursor: pointer;
 }
 #dark-theme:before {
-    filter: saturate(0);
+    filter: brightness(1.6);
     content: "🌙";
 }
 #dark-theme.dark-active:before {
-    filter: saturate(0);
+    filter: brightness(1.6);
     content: "🌕";
 }
 
