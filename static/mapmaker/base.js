@@ -12,7 +12,9 @@ documentReady(() => {
     });
 });
 
-function toggleTilesetWindow() {
+function toggleTilesetWindow(event=null) {
+    if(event !== null && event.target !== event.currentTarget)
+        return;
     document.getElementById("tileset-container").toggleAttribute("hidden");
 }
 
