@@ -64,16 +64,15 @@ class GridMap {
 
         static reMap(dir, amount, mapping, zoom) {
             mapping.map(tle => {
-                let tlePos = tle.getAttribute("gridpos").split('|').map(x => parseInt(x)); // x-y
                 if(dir.x == -1) {
-                    tlePos[0] += amount;
-                    tle.style.left = `${tlePos[0] * zoom}px`;
+                    tle.pos.x += amount;
+                    tle.element.style.left = `${tle.pos.x * zoom}px`;
                 }
                 if(dir.y == -1) {
-                    tlePos[1] += amount;
-                    tle.style.top = `${tlePos[1] * zoom}px`;
+                    tle.pos.y += amount;
+                    tle.element.style.top = `${tle.pos.y * zoom}px`;
                 }
-                tle.setAttribute("gridpos", tlePos.join('|'));
+                tle.element.setAttribute("gridpos", Object.values(tle.pos).join('|'));
             });
         }
 
@@ -84,11 +83,10 @@ class GridMap {
             
 
             mapping.map(tle => {
-                let tlePos = tle.getAttribute("gridpos").split('|').map(x => parseInt(x)); // x-y
-                tle.style.left = `${tlePos[0] * zoom}px`; // x
-                tle.style.top  = `${tlePos[1] * zoom}px`; // y
+                tle.element.style.left = `${tle.pos.x * zoom}px`;
+                tle.element.style.top  = `${tle.pos.y * zoom}px`;
 
-                tle.style.marginBottom = `-${zoom}px`;
+                tle.element.style.marginBottom = `-${zoom}px`;
             });
         }
 
@@ -104,12 +102,11 @@ class GridMap {
         }
 
         static removeOutOfGrid(size, mapping) {
-            let outOfGridCriteria = pos => (pos[0] >= size.x || pos[0] < 0) || (pos[1] >= size.y || pos[1] < 0);
+            let outOfGridCriteria = pos => (pos.x >= size.x || pos.x < 0) || (pos.y >= size.y || pos.y < 0);
 
-            for(let tle=0; tle < mapping.length; tle++) {
-                let tlePos = mapping[tle].getAttribute("gridpos").split('|').map(x => parseInt(x)); // x-y
-                if(outOfGridCriteria(tlePos)) {
-                    mapping[tle].remove();
+            for(let tle = 0; tle < mapping.length; tle++) {
+                if(outOfGridCriteria(mapping[tle].pos)) {
+                    mapping[tle].element.remove();
                     mapping.splice(tle, 1);
                     tle--;
                 }
@@ -173,8 +170,21 @@ class GridMap {
 
         this._instance.querySelector(".gridmap-grid").append(newBlankTile);
         
-        this._mapping.push(newBlankTile);
+        this._mapping.push({
+            element: newBlankTile,
+            pos: {x: x, y: y}
+        });
         return newBlankTile;
+    }
+
+    getTile(x, y) {
+        if((x >= this.sizeX || x < 0) || (y >= this.sizeY || y < 0)) {
+            console.warn(`Invalid tile position, out of bounds. [${x},${y}]`);
+            return null;
+        }
+
+        let foundTile = this._mapping.filter(tle => tle.pos.x == x && tle.pos.y == y);
+        return foundTile.length? foundTile[0]: null;
     }
 }
 

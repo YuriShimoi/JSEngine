@@ -8,6 +8,7 @@
 }
 .imageloader-image {
     flex: 1;
-    min-width: calc(50% - 20px);
+    min-width: 100px;
+    max-width: 300px;
     overflow: hidden;
 }

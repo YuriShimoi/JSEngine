@@ -48,7 +48,9 @@
     content: var(--opened);
 }
 .multi-drawer > .multi-drawer-bookmarks > button.drawer-bookmark:not(.drawer-bookmark-focused):before,
-.drawer.drawer-closed > button.drawer-bookmark:before {
+.drawer.drawer-closed:not([unclosable]) > button.drawer-bookmark:before,
+.multi-drawer[unclosable] > .multi-drawer-bookmarks > button.drawer-bookmark:before,
+.drawer[unclosable] > button.drawer-bookmark:before {
     content: var(--closed);
 }
 
@@ -67,8 +69,8 @@
     border-left: none;
     float: left;
 }
-.multi-drawer.drawer-left.drawer-closed,
-.drawer-left.drawer-closed {
+.multi-drawer.drawer-left.drawer-closed:not([unclosable]),
+.drawer-left.drawer-closed:not([unclosable]) {
     transform: translateX(-100%);
 }
 .multi-drawer.drawer-left > .multi-drawer-bookmarks,
@@ -88,8 +90,8 @@
     border-right: none;
     float: right;
 }
-.multi-drawer.drawer-right.drawer-closed,
-.drawer-right.drawer-closed {
+.multi-drawer.drawer-right.drawer-closed:not([unclosable]),
+.drawer-right.drawer-closed:not([unclosable]) {
     transform: translateX(100%);
 }
 .multi-drawer.drawer-right > .multi-drawer-bookmarks,
@@ -131,20 +133,18 @@
     width: auto;
 }
 .multi-drawer.drawer-left > .multi-drawer-bookmarks > button.drawer-bookmark {
-    border-left: none;
+    border-left-color: var(--drawer-background);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    border-left: none;
 }
 .multi-drawer.drawer-left > .multi-drawer-bookmarks > button.drawer-bookmark:not(.drawer-bookmark-focused) {
-    border-left: var(--drawer-border) var(--drawer-border-color) solid;
+    border-left-color: var(--drawer-border-color);
 }
 .multi-drawer.drawer-right > .multi-drawer-bookmarks > button.drawer-bookmark {
-    border-right: none;
+    border-right-color: var(--drawer-background);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    border-right: none;
 }
 .multi-drawer.drawer-right > .multi-drawer-bookmarks > button.drawer-bookmark:not(.drawer-bookmark-focused) {
-    border-right: var(--drawer-border) var(--drawer-border-color) solid;
+    border-right-color: var(--drawer-border-color);
 }

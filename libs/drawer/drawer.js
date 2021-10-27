@@ -6,8 +6,8 @@ documentReady(() => {
             if(drawerCloseParentClasses.contains("drawer")) {
                 if(drawerCloseParentClasses.contains("drawer-closed"))
                     drawerCloseParentClasses.remove("drawer-closed");
-                else
-                    drawerCloseParentClasses.add("drawer-closed");
+                else if(!drawerCloseBtn[drawerCloseIndex].parentElement.hasAttribute("unclosable"))
+                        drawerCloseParentClasses.add("drawer-closed");
             }
             else if(drawerCloseParentClasses.contains("multi-drawer-bookmarks")) {
                 let drawerCloseParentId = drawerCloseBtn[drawerCloseIndex].getAttribute("for");
@@ -25,7 +25,8 @@ documentReady(() => {
                     drawerCloseBtn[drawerCloseIndex].classList.add("drawer-bookmark-focused");
                 }
                 else {
-                    if(drawerCloseBtn[drawerCloseIndex].classList.contains("drawer-bookmark-focused")) {
+                    if(drawerCloseBtn[drawerCloseIndex].classList.contains("drawer-bookmark-focused")
+                    && !drawerCloseBtn[drawerCloseIndex].parentElement.parentElement.hasAttribute("unclosable")) {
                         multiDrawerParentClasses.add("drawer-closed");
                         drawerCloseBtn[drawerCloseIndex].classList.remove("drawer-bookmark-focused");
                     }
@@ -45,5 +46,4 @@ documentReady(() => {
             }
         });
     }
-}
-);
+});
