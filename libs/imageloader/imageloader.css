@@ -6,9 +6,30 @@
     justify-content: space-between;
     gap: 10px;
 }
-.imageloader-image {
+
+.imageloader > .imageloader-image {
     flex: 1;
     min-width: 100px;
     max-width: 300px;
     overflow: hidden;
+}
+
+.imageloader > .imageloader-pixeltoggle {
+    margin-right: 100%;
+    height: 16px;
+}
+
+.imageloader > .imageloader-pixeltoggle:checked ~ .imageloader-image {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.imageloader-pixeltoggle::after {
+    content: "Pixelated Preview";
+    left: 20px;
+    top: -4px;
+    position: relative;
+    white-space: nowrap;
 }

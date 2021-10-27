@@ -13,6 +13,12 @@ class ImageLoader {
 documentReady(() => {
     let imageLoaderContainers = document.getElementsByClassName("imageloader");
     for(let ilc=0; ilc < imageLoaderContainers.length; ilc++) {
+        let imageLoaderPixelPerfectToggle = document.createElement("input");
+        imageLoaderPixelPerfectToggle.type = "checkbox";
+        imageLoaderPixelPerfectToggle.id = `imageloader-pixeltoggle-${ilc}`;
+        imageLoaderPixelPerfectToggle.classList.add("imageloader-pixeltoggle");
+        imageLoaderContainers[ilc].append(imageLoaderPixelPerfectToggle);
+
         let imageLoaderTargetId = imageLoaderContainers[ilc].getAttribute("for");
         let imageLoaderTarget   = document.getElementById(imageLoaderTargetId);
         imageLoaderTarget.addEventListener("change", (e) => {

@@ -12,5 +12,5 @@
 }
 
 .floatercontainer-container > .floatercontainer[hidden] {
-    display: none;
+    display: none !important;
 }

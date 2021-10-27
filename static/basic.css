@@ -53,6 +53,12 @@ button:active {
     background: var(--button-background-active);
 }
 
+button:disabled, input:disabled, textarea:disabled {
+    background: var(--button-background-hover);
+    border-color: var(--button-background-hover);
+    color: var(--input-color);
+}
+
 button, a, input, textarea {
     outline: none;
 }
@@ -67,7 +73,6 @@ button.btn-block {
 }
 
 textarea {
-    margin: 10px 0;
     display: block;
     width: calc(100% - 6px);
     resize: none;
@@ -75,4 +80,12 @@ textarea {
 
 textarea::placeholder, input::placeholder {
     color: var(--input-placeholder-color);
+}
+
+label {
+    font-size: small;
+}
+
+.float-right {
+    float: right;
 }

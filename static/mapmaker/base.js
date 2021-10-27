@@ -12,6 +12,10 @@ documentReady(() => {
     });
 });
 
-function toggleTileMapWindow() {
-    document.getElementById("tilemap-window").toggleAttribute("hidden");
+function toggleTilesetWindow() {
+    document.getElementById("tileset-container").toggleAttribute("hidden");
+}
+
+function refreshTilesetWindow() {
+    
 }

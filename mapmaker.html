@@ -43,29 +43,48 @@
             <div id="page-drawers" class="multi-drawer drawer-left drawer-closed">
                 <div class="multi-drawer-bookmarks">
                     <button class="drawer-bookmark" for="file-drawer" style="--opened:'↩';--closed:'Fls'"></button>
-                    <button class="drawer-bookmark" for="tilemap-drawer" style="--opened:'↩';--closed:'Tlm'"></button>
-                    <button class="drawer-bookmark" for="export-drawer" style="--opened:'↩';--closed:'Cde'"></button>
+                    <button class="drawer-bookmark" for="tileset-drawer" style="--opened:'↩';--closed:'Tls'"></button>
+                    <button class="drawer-bookmark" for="export-drawer" style="--opened:'↩';--closed:'Exp'"></button>
                 </div>
                 
                 <div class="drawer" id="file-drawer">
-                    <h3>Files</h3>
-                    <label class="file-input-span" for="file-input">Load Image</label>
-                    <input type="file" id="file-input" accept="image/png, image/jpeg, image/jpg" multiple>
-                    <div class="imageloader" for="file-input"></div>
+                    <div class="flexible-drawer-content">
+                        <div>
+                            <h3>Files</h3>
+                            <label class="file-input-span" for="file-input">Load Image</label>
+                            <input type="file" id="file-input" accept="image/png, image/jpeg, image/jpg" multiple>
+                        </div>
+                        <div id="file-imageloader" class="imageloader" for="file-input"></div>
+                    </div>
                 </div>
 
-                <div class="drawer" id="tilemap-drawer">
-                    <h3>Tile Maps</h3>
-                    <button class="btn-block" onclick="toggleTileMapWindow()">New Tile Map</button>
-                    <div id="tilemap-window" class="floatercontainer drawer" hidden>
-                        testeee
+                <div class="drawer" id="tileset-drawer">
+                    <div>
+                        <div>
+                            <h3>Tilesets</h3>
+                            <button class="btn-block" onclick="toggleTilesetWindow()">New Tileset</button>
+                        </div>
+                        <div id="tileset-container" class="floatercontainer" hidden>
+                            <div id="tileset-window" class="drawer">
+                                <header>
+                                    <button class="float-right" onclick="toggleTilesetWindow()">⨉</button>
+                                    <button class="float-right" onclick="refreshTilesetWindow()">↻</button>
+                                    <h3>New Tileset</h3>
+                                </header>
+                                testeee
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="drawer" id="export-drawer">
-                    <h3>Code Export</h3>
-                    <button class="btn-block">Spectate Map ▷</button>
-                    <textarea id="code-export-area" placeholder="code to export"></textarea>
+                    <h3>Exporting</h3>
+                    <button class="btn-block" style="margin-bottom:5px">Full Image</button>
+                    <button class="btn-block" style="margin-bottom:5px">Condensed Tileset</button>
+                    <button class="btn-block" style="margin-bottom:5px" disabled>Spectate Map ▷</button>
+
+                    <label for="code-export-area">Engine Code Export</label>
+                    <textarea id="code-export-area" placeholder="..." disabled></textarea>
                 </div>
             </div>
 

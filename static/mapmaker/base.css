@@ -101,6 +101,14 @@ h1, h2, h3 {
     color: var(--tool-hover-color);
 }
 
+.flexible-drawer-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
 #code-export-area {
     resize: vertical;
     min-height: 150px;
@@ -135,9 +143,46 @@ label.file-input-span:active {
     background: var(--button-background-active);
 }
 
-#tilemap-window {
+#file-imageloader {
+    max-height: 100%;
+    overflow-y: overlay;
+    overflow-x: hidden;
+}
+#file-imageloader::-webkit-scrollbar {
+    width: 7px;
+    display: none;
+}
+#file-imageloader:hover::-webkit-scrollbar {
+    display: block;
+}
+#file-imageloader::-webkit-scrollbar-thumb {
+    background: var(--page-color);
+    border-radius: 1px;
+}
+
+#tileset-container {
+    width: 100%;
+    height: 100%;
+    background: #00000011;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tileset-container > #tileset-window {
     width: 70%;
     height: 80%;
     max-width: 600px;
     max-height: 700px;
+}
+
+#tileset-container > #tileset-window > header {
+    margin: -10px;
+    padding: 5px 10px;
+}
+#tileset-container > #tileset-window > header > button {
+    font-size: large;
+    font-weight: bold;
+    padding: 0 5px;
+    margin: 5px 0 5px 5px;
 }
