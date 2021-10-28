@@ -16,8 +16,20 @@ function toggleTilesetWindow(event=null) {
     if(event !== null && event.target !== event.currentTarget)
         return;
     document.getElementById("tileset-container").toggleAttribute("hidden");
+
+    if(!document.getElementById("tileset-container").hasAttribute("hidden"))
+        refreshTilesetWindow();
 }
 
 function refreshTilesetWindow() {
-    
+    let tilesetTexture = document.getElementById("tileset-form-texture");
+    if(tilesetTexture.children.length == ImageLoader.files.length)
+        return;
+
+    for(let imgFile = tilesetTexture.children.length; imgFile < ImageLoader.files.length; imgFile++) {
+        let tilesetTextureOption = document.createElement("option");
+        tilesetTextureOption.id = `tileset-texture-option-${imgFile}`;
+        tilesetTextureOption.innerHTML = ImageLoader.files[imgFile].file.name.split(".")[0];
+        tilesetTexture.append(tilesetTextureOption);
+    }
 }

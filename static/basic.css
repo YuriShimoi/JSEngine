@@ -30,13 +30,13 @@ hr {
     border-bottom: none;
 }
 
-button, input, textarea {
+button, input, textarea, select {
     border: solid 1px var(--input-border);
     background: var(--input-background);
     color: var(--input-color);
     border-radius: 1px;
 }
-button, input {
+button, input, select {
     height: 25px;
     line-height: 25px;
     padding: 0 10px;
@@ -59,7 +59,7 @@ button:disabled, input:disabled, textarea:disabled {
     color: var(--input-color);
 }
 
-button, a, input, textarea {
+button, a, input, textarea, select {
     outline: none;
 }
 
@@ -78,7 +78,7 @@ textarea {
     resize: none;
 }
 
-textarea::placeholder, input::placeholder {
+textarea::placeholder, input::placeholder, select::placeholder {
     color: var(--input-placeholder-color);
 }
 
