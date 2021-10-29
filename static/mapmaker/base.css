@@ -220,13 +220,18 @@ label.file-input-span:active {
     margin: 5px 0 -5px 0;
 }
 #palette-container > #palette-window > .palette-window-grid-container > div > #palette-form-texture {
-    width: 100%;
+    width: calc(100% - 26px);
     max-width: 200px;
     text-transform: capitalize;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
+#palette-container > #palette-window > .palette-window-grid-container > div > .file-input-span {
+    display: inline-block;
+    width: 25px;
+    margin: 0 -5px 0 0;
+    transform: translateY(1px);
+}
 #palette-container > #palette-window > #palette-form-confirm {
     margin-top: 10px;
 }

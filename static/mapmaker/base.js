@@ -10,6 +10,8 @@ documentReady(() => {
         darkThemeBtn.classList.toggle("dark-active");
         document.body.setAttribute("dark-theme", darkThemeBtn.classList.contains("dark-active"));
     });
+
+    document.getElementById("file-input").addEventListener("change", () => { setTimeout(updatePaletteImages, 1) });
 });
 
 function togglePaletteWindow(event=null) {
@@ -22,14 +24,21 @@ function togglePaletteWindow(event=null) {
 }
 
 function refreshPaletteWindow() {
+    updatePaletteImages();
+
+}
+
+function updatePaletteImages() {
     let paletteTexture = document.getElementById("palette-form-texture");
     if((paletteTexture.children.length - 1) == ImageLoader.files.length)
         return;
 
+    let selectFirstAtEnd = paletteTexture.children.length == 1 && ImageLoader.files.length;
     for(let imgFile = paletteTexture.children.length - 1; imgFile < ImageLoader.files.length; imgFile++) {
         let paletteTextureOption = document.createElement("option");
         paletteTextureOption.value = imgFile;
         paletteTextureOption.innerHTML = ImageLoader.files[imgFile].file.name.split(".")[0];
         paletteTexture.append(paletteTextureOption);
     }
+    if(selectFirstAtEnd) paletteTexture.value = 0;
 }

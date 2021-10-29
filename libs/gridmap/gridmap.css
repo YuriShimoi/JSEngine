@@ -104,14 +104,26 @@
     --cursor-border: 3px;
     z-index: 5;
     position: relative;
-    border: var(--cursor-border) solid var(--gridmap-cursor-color);
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 0 0 0 2px var(--gridmap-cursor-color);
 
     top: calc(var(--grid-zoom) * -2);
     left: calc(var(--grid-zoom) * -2);
-    margin-bottom: calc(calc(var(--grid-zoom) + var(--cursor-border)) * -1);
-    width: calc(var(--grid-zoom) - var(--cursor-border));
-    height: calc(var(--grid-zoom) - var(--cursor-border));
+    margin-bottom: calc(var(--grid-zoom) * -1);
+    width: var(--grid-zoom);
+    height: var(--grid-zoom);
+    
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform:translateZ(0);
 
     pointer-events: none;
-    transition: border-color ease 100ms;
+    transition: box-shadow ease 0ms;
+}
+.gridmap-grid .gridmap-cursor[animated] {
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 0 0 0 var(--cursor-border) var(--gridmap-cursor-color);
+    transition: box-shadow ease 100ms;
 }

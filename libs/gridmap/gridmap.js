@@ -50,6 +50,7 @@ class GridMap {
 
             let gridMapCursor = document.createElement("div");
             gridMapCursor.classList.add("gridmap-cursor");
+            gridMapCursor.setAttribute("animated", "true");
             generatedGrid.append(gridMapCursor);
             generatedGrid.setAttribute("onmousemove",  "GridMapHandler.cursor('move',  event, this)");
             generatedGrid.setAttribute("onmousedown",  "GridMapHandler.cursor('down',  event, this)");
@@ -229,13 +230,19 @@ class GridMapHandler {
         let gridMapCursorPos;
         switch(type) {
             case "move":
-                let cursorBorderSize = parseInt(window.getComputedStyle(gridMapCursor).getPropertyValue("--cursor-border").replace("px","")) / 2;
                 gridMapCursorPos = {
-                    x: event.offsetX - (event.offsetX % gridMapInstance._zoom) - cursorBorderSize,
-                    y: event.offsetY - (event.offsetY % gridMapInstance._zoom) - cursorBorderSize
+                    x: event.offsetX - (event.offsetX % gridMapInstance._zoom),
+                    y: event.offsetY - (event.offsetY % gridMapInstance._zoom)
                 }
-                gridMapCursor.style.left = `${gridMapCursorPos.x}px`;
-                gridMapCursor.style.top = `${gridMapCursorPos.y}px`;
+                if(gridMapCursor.style.left != `${gridMapCursorPos.x}px`
+                || gridMapCursor.style.top  != `${gridMapCursorPos.y}px`) {
+                    gridMapCursor.style.left = `${gridMapCursorPos.x}px`;
+                    gridMapCursor.style.top  = `${gridMapCursorPos.y}px`;
+                    gridMapCursor.toggleAttribute("animated");
+                    setTimeout(()=>{
+                        gridMapCursor.toggleAttribute("animated");
+                    },1);
+                }
                 break;
             case "down":
 
