@@ -37,9 +37,13 @@ button, input, textarea, select {
     border-radius: 1px;
 }
 button, input, select {
+    height: 27px;
+    line-height: 27px;
+    padding: 0 10px;
+}
+input {
     height: 25px;
     line-height: 25px;
-    padding: 0 10px;
 }
 
 button {
@@ -85,6 +89,31 @@ textarea::placeholder, input::placeholder, select::placeholder {
 label {
     font-size: small;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+*::-webkit-scrollbar {
+    width: 7px;
+    display: none;
+}
+*:hover::-webkit-scrollbar {
+    display: block;
+}
+*::-webkit-scrollbar-thumb {
+    background: var(--page-color);
+    border-radius: 1px;
+}
+
 
 .float-right {
     float: right;

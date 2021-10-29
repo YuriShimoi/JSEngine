@@ -1,9 +1,9 @@
-const MAPINITSIZE = {x: 15, y:9};
+const MAPINITSIZE = {x: 41, y:23};
 var gridMap = new GridMap(MAPINITSIZE.x, MAPINITSIZE.y);
 
 documentReady(() => {
     gridMap.init("#mapChess");
-    gridMap.newTile(7, 4);
+    gridMap.newTile(20, 11);
 
     let darkThemeBtn = document.getElementById("dark-theme");
     darkThemeBtn.addEventListener("click", () => {
@@ -12,24 +12,24 @@ documentReady(() => {
     });
 });
 
-function toggleTilesetWindow(event=null) {
+function togglePaletteWindow(event=null) {
     if(event !== null && event.target !== event.currentTarget)
         return;
-    document.getElementById("tileset-container").toggleAttribute("hidden");
+    document.getElementById("palette-container").toggleAttribute("hidden");
 
-    if(!document.getElementById("tileset-container").hasAttribute("hidden"))
-        refreshTilesetWindow();
+    if(!document.getElementById("palette-container").hasAttribute("hidden"))
+        refreshPaletteWindow();
 }
 
-function refreshTilesetWindow() {
-    let tilesetTexture = document.getElementById("tileset-form-texture");
-    if(tilesetTexture.children.length == ImageLoader.files.length)
+function refreshPaletteWindow() {
+    let paletteTexture = document.getElementById("palette-form-texture");
+    if((paletteTexture.children.length - 1) == ImageLoader.files.length)
         return;
 
-    for(let imgFile = tilesetTexture.children.length; imgFile < ImageLoader.files.length; imgFile++) {
-        let tilesetTextureOption = document.createElement("option");
-        tilesetTextureOption.id = `tileset-texture-option-${imgFile}`;
-        tilesetTextureOption.innerHTML = ImageLoader.files[imgFile].file.name.split(".")[0];
-        tilesetTexture.append(tilesetTextureOption);
+    for(let imgFile = paletteTexture.children.length - 1; imgFile < ImageLoader.files.length; imgFile++) {
+        let paletteTextureOption = document.createElement("option");
+        paletteTextureOption.value = imgFile;
+        paletteTextureOption.innerHTML = ImageLoader.files[imgFile].file.name.split(".")[0];
+        paletteTexture.append(paletteTextureOption);
     }
 }

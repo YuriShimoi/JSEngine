@@ -126,8 +126,8 @@ label.file-input-span {
     border-radius: 1px;
 
     width: calc(100% - 2px);
-    height: 23px;
-    line-height: 25px;
+    height: 25px;
+    line-height: 27px;
     padding: 0;
     display: block;
     text-align: center;
@@ -148,41 +148,85 @@ label.file-input-span:active {
     overflow-y: overlay;
     overflow-x: hidden;
 }
-#file-imageloader::-webkit-scrollbar {
-    width: 7px;
-    display: none;
-}
-#file-imageloader:hover::-webkit-scrollbar {
-    display: block;
-}
-#file-imageloader::-webkit-scrollbar-thumb {
-    background: var(--page-color);
-    border-radius: 1px;
-}
 
-#tileset-container {
+#palette-container {
     width: 100%;
     height: 100%;
-    background: #00000011;
+    background: #00000018;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#tileset-container > #tileset-window {
+#palette-container > #palette-window {
     width: 70%;
-    height: 80%;
-    max-width: 600px;
+    max-width: 700px;
     max-height: 700px;
 }
 
-#tileset-container > #tileset-window > header {
+#palette-container > #palette-window > header {
     margin: -10px;
     padding: 5px 10px;
 }
-#tileset-container > #tileset-window > header > button {
+#palette-container > #palette-window > header > button {
     font-size: large;
     font-weight: bold;
     padding: 0 5px;
-    margin: 5px 0 5px 5px;
+    margin: 5px 0 10px 5px;
+}
+
+#palette-container > #palette-window > #palette-form-config {
+    display: flex;
+    width: 100%;
+}
+#palette-container > #palette-window > #palette-form-config > input {
+    flex: 1;
+}
+#palette-container > #palette-window > #palette-form-config > span.palette-form-span {
+    max-width: fit-content;
+    margin: 0 5px;
+    font-size: 15px;
+    line-height: 28px;
+}
+#palette-container > #palette-window > #palette-form-config > input#palette-form-name {
+    margin-right: 10px;
+}
+#palette-container > #palette-window > #palette-form-config > input#palette-form-x,
+#palette-container > #palette-window > #palette-form-config > input#palette-form-y {
+    max-width: 27px;
+    text-align: right;
+}
+
+#palette-container > #palette-window > .palette-window-grid-container {
+    display: flex;
+    width: 100%;
+    min-height: 350px;
+    height: 60vh;
+    max-height: 500px;
+    column-gap: 10px;
+    margin-top: 20px;
+}
+#palette-container > #palette-window > .palette-window-grid-container > div {
+    flex: 1;
+}
+#palette-container > #palette-window > .palette-window-grid-container > div > .palette-window-grid {
+    height: calc(100% - 33px);
+    background: #ee82ee77;
+    margin-top: 5px;
+}
+#palette-container > #palette-window > .palette-window-grid-container > div > .palette-window-grid-title {
+    text-align: center;
+    font-weight: 200;
+    margin: 5px 0 -5px 0;
+}
+#palette-container > #palette-window > .palette-window-grid-container > div > #palette-form-texture {
+    width: 100%;
+    max-width: 200px;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#palette-container > #palette-window > #palette-form-confirm {
+    margin-top: 10px;
 }

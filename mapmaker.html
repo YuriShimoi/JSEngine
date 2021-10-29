@@ -43,7 +43,7 @@
             <div id="page-drawers" class="multi-drawer drawer-left drawer-closed">
                 <div class="multi-drawer-bookmarks">
                     <button class="drawer-bookmark" for="file-drawer" style="--opened:'↩';--closed:'Fls'"></button>
-                    <button class="drawer-bookmark" for="tileset-drawer" style="--opened:'↩';--closed:'Tls'"></button>
+                    <button class="drawer-bookmark" for="palette-drawer" style="--opened:'↩';--closed:'Plt'"></button>
                     <button class="drawer-bookmark" for="export-drawer" style="--opened:'↩';--closed:'Exp'"></button>
                 </div>
                 
@@ -58,20 +58,43 @@
                     </div>
                 </div>
 
-                <div class="drawer" id="tileset-drawer">
+                <div class="drawer" id="palette-drawer">
                     <div>
                         <div>
-                            <h3>Tilesets</h3>
-                            <button class="btn-block" onclick="toggleTilesetWindow()">New Tileset</button>
+                            <h3>Palettes</h3>
+                            <button class="btn-block" onclick="togglePaletteWindow()">New Palette</button>
                         </div>
-                        <div id="tileset-container" class="floatercontainer" onclick="toggleTilesetWindow(event)" hidden>
-                            <div id="tileset-window" class="drawer">
+                        <div id="palette-container" class="floatercontainer" onclick="togglePaletteWindow(event)" hidden>
+                            <div id="palette-window" class="drawer">
                                 <header>
-                                    <button class="float-right" onclick="toggleTilesetWindow()">⨉</button>
-                                    <button class="float-right" onclick="refreshTilesetWindow()">↻</button>
-                                    <h3>New Tileset</h3>
+                                    <button class="float-right" onclick="togglePaletteWindow()">⨉</button>
+                                    <button class="float-right" onclick="refreshPaletteWindow()">↻</button>
+                                    <h3 style="padding-left:72px">Palette Config</h3>
                                 </header>
-                                <select id="tileset-form-texture"></select>
+                                <div id="palette-form-config">
+                                    <span class="palette-form-span">Name</span>
+                                    <input id="palette-form-name" type="text" placeholder="Palette Name">
+                                    <span class="palette-form-span">Grid Size</span>
+                                    <input id="palette-form-x" placeholder="x" value="16" type="number" max="512" min="4">
+                                    <span class="palette-form-span">×</span>
+                                    <input id="palette-form-y" placeholder="y" value="16" type="number" max="512" min="4">
+                                </div>
+                                
+                                <div class="palette-window-grid-container">
+                                    <div>
+                                        <select id="palette-form-texture"><option value="" selected disabled>Select Image</option></select>
+                                        <div class="palette-window-grid">
+
+                                        </div>
+                                    </div>
+                                    <div style="max-width: 250px;">
+                                        <h4 class="palette-window-grid-title">Palette</h4>
+                                        <div class="palette-window-grid">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <button id="palette-form-confirm" class="btn-block">Confirm</button>
                             </div>
                         </div>
                     </div>
