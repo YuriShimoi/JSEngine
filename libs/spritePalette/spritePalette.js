@@ -19,44 +19,50 @@ class SpritePalette {
             return new Blob(byteArrays, {type: contentType});
         }
 
-        static loadPalette(imageLoad, clip, parent, imageBinary) {
-            const TILESIZE  = 60;
+        static createPalette(pSize, imgProps=null) {
+            let paletteTable = document.createElement("table");
 
-            let imgSize = {
-                'x': imageLoad.width,
-                'y': imageLoad.height
-            }
-
-            let minors = {
-                'x': Math.floor(imgSize.x / clip.x),
-                'y': Math.floor(imgSize.y / clip.y)
-            };
-            let tileScale = {
-                'x': (TILESIZE * minors.x) / imgSize.x,
-                'y': (TILESIZE * minors.y) / imgSize.y
-            };
-
-            parent.innerHTML = "";
-            let parentTable = document.createElement("table");
-            
-            for(let y = 0; y < minors.y; y++) {
-                let parentTableRow = parentTable.insertRow(y);
-                for(let x = 0; x < minors.x; x++) {
-                    let imageElement = parentTableRow.insertCell(x);
+            for(let y = 0; y < pSize.y; y++) {
+                let paletteTableRow = paletteTable.insertRow(y);
+                for(let x = 0; x < pSize.x; x++) {
+                    let imageElement = paletteTableRow.insertCell(x);
                     imageElement.classList.add("sprite-palette-tile");
                     
                     imageElement.setAttribute("clip", `${x}|${y}`);
-                    imageElement.style.backgroundImage = `url("${imageBinary}")`;
-                    imageElement.style.backgroundSize  = `${imgSize.x * tileScale.x}px ${imgSize.y * tileScale.y}px`;
-                    let coord = {
-                        'x': `${(x*clip.x) * tileScale.x}px`,
-                        'y': `${(y*clip.y) * tileScale.y}px`
-                    };
-                    imageElement.style.backgroundPosition = `-${coord.x} -${coord.y}`;
+                    if(imgProps != null) {
+                        imageElement.style.backgroundImage    = `url("${imgProps.image}")`;
+                        imageElement.style.backgroundSize     = `${imgProps.size.x * imgProps.scale.x}px ${imgProps.size.y * imgProps.scale.y}px`;
+                        imageElement.style.backgroundPosition = `-${(x*imgProps.clip.x) * imgProps.scale.x}px -${(y*imgProps.clip.y) * imgProps.scale.y}px`;
+                    }
                 }
             }
 
-            parent.append(parentTable);
+            return paletteTable;
+        }
+
+        static loadPalette(imageLoad, clip, parent, imageBinary) {
+            const TILESIZE  = 60;
+
+            let minors = {
+                'x': Math.floor(imageLoad.width / clip.x),
+                'y': Math.floor(imageLoad.height / clip.y)
+            };
+
+            let imgProps = {
+                'image': imageBinary,
+                'clip' : clip,
+                'scale': {
+                    'x': (TILESIZE * minors.x) / imageLoad.width,
+                    'y': (TILESIZE * minors.y) / imageLoad.height
+                },
+                'size' : {
+                    'x': imageLoad.width,
+                    'y': imageLoad.height
+                }
+            };
+            
+            parent.innerHTML = "";
+            return parent.append(this.createPalette(minors, imgProps));
         }
     }
 
@@ -93,5 +99,12 @@ class SpritePalette {
         fullImageLoaded.onload = () => {
             this._internal.loadPalette(fullImageLoaded, this.size, this._instance, imageBinary);
         };
+    }
+
+    loadEmpty(size) {
+        if(this._instance === null) this.init();
+
+        this._instance.innerHTML = "";
+        this._instance.append(this._internal.createPalette(size));
     }
 }

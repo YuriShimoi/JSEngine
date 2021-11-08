@@ -1,5 +1,6 @@
 :root {
     --page-background: #eee;
+    --page-background-secondary: #ddd;
     --page-color: #222;
     --tool-color: #aaa;
     --tool-hover-color: #222;
@@ -208,11 +209,11 @@ label.file-input-span:active {
 }
 #palette-container > #palette-window > .palette-window-grid-container > div {
     flex: 1;
-    max-width: calc(100% - 260px);
+    max-width: calc(100% - 275px);
 }
 #palette-container > #palette-window > .palette-window-grid-container > div > .palette-window-grid {
     height: calc(100% - 33px);
-    background: #ee82ee77;
+    background: var(--page-background);
     margin-top: 5px;
 }
 #palette-container > #palette-window > .palette-window-grid-container > div > .palette-window-grid-title {

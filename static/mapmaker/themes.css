@@ -1,6 +1,7 @@
 [dark-theme="true"] {
     --hr-color: #444;
     --page-background: #222;
+    --page-background-secondary: #1a1a1a;
     --page-color: #fff;
     --tool-color: #777;
     --tool-hover-color: #fff;
@@ -13,14 +14,14 @@
     --button-background-hover: #151515;
     --button-background-active: #111;
     
-    --drawer-background: #1a1a1a;
+    --drawer-background: var(--page-background-secondary);
     --drawer-border-color: #090909;
     
     --gridmap-primary-black: #eee;
     --gridmap-primary-gray: #090909;
     --gridmap-secondary-gray: #777;
     --gridmap-primary-white: #151515;
-    --gridmap-secondary-white: #1a1a1a;
+    --gridmap-secondary-white: var(--page-background-secondary);
     --gridmap-highlight: #0051ff;
     --gridmap-placehold-color: turquoise;
     
@@ -31,4 +32,7 @@
     --gridmap-border: var(--gridmap-primary-gray);
     --gridmap-color: var(--gridmap-primary-black);
     --gridmap-disabled-color: var(--gridmap-secondary-gray);
+
+    --tile-background: var(--page-background);
+    --tile-border: var(--page-background-secondary);
 }

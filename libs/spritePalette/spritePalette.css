@@ -1,6 +1,11 @@
+:root {
+    --tile-background: #eee;
+    --tile-border: #fff;
+}
+
 .sprite-palette-container {
     display: block;
-    overflow: scroll;
+    overflow: auto;
     width: 100%;
     height: 100%;
 }
@@ -10,20 +15,33 @@
     padding: 0;
     font-size: 0;
     width: max-content;
-    /* border-spacing: 0; */
     border-collapse: collapse;
-    border: 1px solid lightgray;
+    border: none;
 }
 
 .sprite-palette-container .sprite-palette-tile {
     display: inline-block;
     padding: 0;
-    border: 1px solid lightgray;
-    width: 60px;
-    height: 60px;
+    border: 1px solid var(--tile-border);
+    width: 50px;
+    height: 50px;
+    background: var(--tile-background);
     
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+}
+
+.sprite-palette-container > table tr:first-child .sprite-palette-tile {
+    border-top: none;
+}
+.sprite-palette-container > table tr:last-child .sprite-palette-tile {
+    border-bottom: none;
+}
+.sprite-palette-container > table tr .sprite-palette-tile:first-child {
+    border-left: none;
+}
+.sprite-palette-container > table tr .sprite-palette-tile:last-child {
+    border-right: none;
 }

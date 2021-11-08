@@ -22,6 +22,9 @@ documentReady(() => {
 
     let paletteImage = document.getElementById("palette-form-texture");
     paletteImage.addEventListener("change", () => { paletteTextureUpdate(paletteImage) });
+
+    let paletteConfig = document.getElementById("palette-config-grid");
+    new SpritePalette(paletteConfig, {x:24,y:24}).loadEmpty({x:5,y:10});
 });
 
 function togglePaletteWindow(event=null) {
