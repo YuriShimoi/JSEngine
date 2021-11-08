@@ -208,6 +208,7 @@ label.file-input-span:active {
 }
 #palette-container > #palette-window > .palette-window-grid-container > div {
     flex: 1;
+    max-width: calc(100% - 260px);
 }
 #palette-container > #palette-window > .palette-window-grid-container > div > .palette-window-grid {
     height: calc(100% - 33px);
