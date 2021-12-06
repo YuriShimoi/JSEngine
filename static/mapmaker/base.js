@@ -7,6 +7,8 @@ documentReady(() => {
     gridMap.newTile(20, 11);
 
     let darkThemeBtn = document.getElementById("dark-theme");
+    darkThemeBtn.classList.add("dark-active");
+    document.body.setAttribute("dark-theme", true);
     darkThemeBtn.addEventListener("click", () => {
         darkThemeBtn.classList.toggle("dark-active");
         document.body.setAttribute("dark-theme", darkThemeBtn.classList.contains("dark-active"));

@@ -41,7 +41,7 @@ class SpritePalette {
         }
 
         static loadPalette(imageLoad, clip, parent, imageBinary) {
-            const TILESIZE  = 60;
+            const TILESIZE  = 50;
 
             let minors = {
                 'x': Math.floor(imageLoad.width / clip.x),
@@ -63,6 +63,15 @@ class SpritePalette {
             
             parent.innerHTML = "";
             return parent.append(this.createPalette(minors, imgProps));
+        }
+
+        static bindTileEvents(parent) {
+            let bindTiles = parent.getElementsByClassName("sprite-palette-tile");
+            for(let bdt = 0; bdt < bindTiles.length; bdt++) {
+                bindTiles[bdt].addEventListener("click", () => {
+                    GlobalSpritePaletteHolder.hold(bindTiles[bdt]);
+                });
+            }
         }
     }
 
@@ -98,6 +107,7 @@ class SpritePalette {
 
         fullImageLoaded.onload = () => {
             this._internal.loadPalette(fullImageLoaded, this.size, this._instance, imageBinary);
+            this._internal.bindTileEvents(this._instance);
         };
     }
 
@@ -106,5 +116,27 @@ class SpritePalette {
 
         this._instance.innerHTML = "";
         this._instance.append(this._internal.createPalette(size));
+        this._internal.bindTileEvents(this._instance);
+    }
+
+    setTile(pos, imgProps) {
+
+    }
+}
+
+class GlobalSpritePaletteHolder {
+    static _holdTile = null;
+
+    static hold(tile) {
+        if(this._holdTile == tile) {
+            this._holdTile.classList.remove("sprite-palette-holder");
+            this._holdTile = null;
+        }
+        else {
+            if(this._holdTile != null)
+                this._holdTile.classList.remove("sprite-palette-holder");
+            this._holdTile = tile;
+            this._holdTile.classList.add("sprite-palette-holder");
+        }
     }
 }
