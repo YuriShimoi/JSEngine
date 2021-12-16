@@ -2,12 +2,13 @@ class SpritePalette {
     _parentElement = null;
     _instance = null;
     _internal = class PaletteInternal {
-        static b64toBlob(b64Data, contentType='image/png', sliceSize=512) {
+        static b64toBlob(b64Data, contentType='image/png') {
+            const SLICESIZE = 512;
             let byteCharacters = atob(b64Data);
             let byteArrays     = [];
           
-            for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-                let byteSlice = byteCharacters.slice(offset, offset + sliceSize);
+            for (let offset = 0; offset < byteCharacters.length; offset += SLICESIZE) {
+                let byteSlice = byteCharacters.slice(offset, offset + SLICESIZE);
                 let byteNumbers = new Array(byteSlice.length);
                 for (let i = 0; i < byteSlice.length; i++) {
                     byteNumbers[i] = byteSlice.charCodeAt(i);
@@ -29,7 +30,7 @@ class SpritePalette {
                     imageElement.classList.add("sprite-palette-tile");
                     
                     imageElement.setAttribute("clip", `${x}|${y}`);
-                    if(imgProps != null) {
+                    if(imgProps !== null) {
                         imageElement.style.backgroundImage    = `url("${imgProps.image}")`;
                         imageElement.style.backgroundSize     = `${imgProps.size.x * imgProps.scale.x}px ${imgProps.size.y * imgProps.scale.y}px`;
                         imageElement.style.backgroundPosition = `-${(x*imgProps.clip.x) * imgProps.scale.x}px -${(y*imgProps.clip.y) * imgProps.scale.y}px`;
@@ -69,7 +70,7 @@ class SpritePalette {
             let bindTiles = parent.getElementsByClassName("sprite-palette-tile");
             for(let bdt = 0; bdt < bindTiles.length; bdt++) {
                 bindTiles[bdt].addEventListener("click", () => {
-                    GlobalSpritePaletteHolder.hold(bindTiles[bdt]);
+                    GlobalSpritePaletteHolder.click(bindTiles[bdt]);
                 });
             }
         }
@@ -118,14 +119,44 @@ class SpritePalette {
         this._instance.append(this._internal.createPalette(size));
         this._internal.bindTileEvents(this._instance);
     }
-
-    setTile(pos, imgProps) {
-
-    }
 }
 
 class GlobalSpritePaletteHolder {
     static _holdTile = null;
+    _internal = class InternalGlobalSpritePaletteHolder {
+        static draw(tile) {
+            return tile.setAttribute("style", GlobalSpritePaletteHolder._holdTile.getAttribute("style"));
+        }
+    
+        static clear(tile) {
+            return tile.setAttribute("style", "");
+        }
+    
+        static getParentWindow(tile) {
+            let parentWindow = tile.parentElement;
+            while(!parentWindow.classList.contains("palette-window-grid")) {
+                parentWindow = parentWindow.parentElement;
+            }
+            return parentWindow;
+        }
+    }
+
+    static click(tile) {
+        let parentWindow = this._internal.getParentWindow(tile);
+        debugger;
+        if(this._holdTile === null) {
+            if(parentWindow.getAttribute("--palette-select") === "false")
+                this._internal.clear(tile);
+            else
+                this.hold(tile);
+        }
+        else {
+            if(parentWindow.getAttribute("--palette-draw") === "false")
+                this.hold(tile);
+            else
+                this._internal.draw(tile);
+        }
+    }
 
     static hold(tile) {
         if(this._holdTile == tile) {

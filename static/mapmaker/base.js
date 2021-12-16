@@ -65,7 +65,7 @@ function updatePaletteImages() {
         let sizeX = parseInt(document.getElementById("palette-form-x").value);
         let sizeY = parseInt(document.getElementById("palette-form-y").value);
         let paletteLoaderGrid = document.getElementById("palette-loader-grid");
-        palette = new SpritePalette(paletteLoaderGrid, {'x': sizeX, 'y': sizeY});
+        palette = new SpritePalette(paletteLoaderGrid, {x: sizeX,y:sizeY});
         paletteTexture.value = 0;
         paletteTextureUpdate(paletteTexture);
     }
