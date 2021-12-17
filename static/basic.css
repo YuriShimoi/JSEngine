@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap');
+@font-face {
+    font-family: 'Baloo 2';
+    src: url('fonts/Baloo_2/Baloo2-Medium.ttf') format('truetype');
+}
 
 :root {
     --hr-color: #ddd;
@@ -93,22 +96,30 @@ label {
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
-
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
+
+* { /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--page-color) transparent;
+}
+/* Chrome, Safari, Edge, Opera */
 *::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 8px;
+    height: 8px;
 }
 *::-webkit-scrollbar-thumb {
     background: var(--page-color);
     border-radius: 1px;
+}
+*::-webkit-scrollbar-corner {
+    background-color: transparent;
 }
 
 

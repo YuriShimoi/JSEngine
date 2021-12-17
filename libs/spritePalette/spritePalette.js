@@ -123,7 +123,7 @@ class SpritePalette {
 
 class GlobalSpritePaletteHolder {
     static _holdTile = null;
-    _internal = class InternalGlobalSpritePaletteHolder {
+    static _internal = class InternalGlobalSpritePaletteHolder {
         static draw(tile) {
             return tile.setAttribute("style", GlobalSpritePaletteHolder._holdTile.getAttribute("style"));
         }
@@ -143,7 +143,6 @@ class GlobalSpritePaletteHolder {
 
     static click(tile) {
         let parentWindow = this._internal.getParentWindow(tile);
-        debugger;
         if(this._holdTile === null) {
             if(parentWindow.getAttribute("--palette-select") === "false")
                 this._internal.clear(tile);
