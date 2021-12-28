@@ -169,4 +169,12 @@ class GlobalSpritePaletteHolder {
             this._holdTile.classList.add("sprite-palette-holder");
         }
     }
+
+    static clear() {
+        this._holdTile = null;
+        let tile_holder_list = document.querySelectorAll(".sprite-palette-container .sprite-palette-tile.sprite-palette-holder");
+        for(let thl=0; thl < tile_holder_list.length; thl++) {
+            tile_holder_list[thl].classList.remove("sprite-palette-holder");
+        }
+    }
 }

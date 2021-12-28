@@ -33,6 +33,7 @@ function togglePaletteWindow(event=null) {
     if(event !== null && event.target !== event.currentTarget)
         return;
     document.getElementById("palette-container").toggleAttribute("hidden");
+    GlobalSpritePaletteHolder.clear();
 
     if(!document.getElementById("palette-container").hasAttribute("hidden"))
         refreshPaletteWindow();
