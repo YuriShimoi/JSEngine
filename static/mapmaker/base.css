@@ -42,6 +42,8 @@ h1, h2, h3 {
     pointer-events: auto;
 }
 
+
+
 #dark-theme {
     filter: saturate(0);
     position: absolute;
@@ -63,6 +65,8 @@ h1, h2, h3 {
     filter: brightness(1.6);
     content: "🌕";
 }
+
+
 
 #page-drawers {
     z-index: 2;
@@ -102,6 +106,8 @@ h1, h2, h3 {
     color: var(--tool-hover-color);
 }
 
+
+
 .flexible-drawer-content {
     height: 100%;
     display: flex;
@@ -110,12 +116,16 @@ h1, h2, h3 {
     overflow: hidden;
 }
 
+
+
 #code-export-area {
     resize: vertical;
     min-height: 150px;
     height: 150px;
     max-height: 400px;
 }
+
+
 
 #file-input {
     display: none;
@@ -149,6 +159,8 @@ label.file-input-span:active {
     overflow-y: overlay;
     overflow-x: hidden;
 }
+
+
 
 #palette-container {
     width: 100%;
@@ -236,4 +248,24 @@ label.file-input-span:active {
 }
 #palette-container > #palette-window > #palette-form-confirm {
     margin-top: 10px;
+}
+
+
+
+#palette-label-container {
+    overflow-y: auto;
+    max-height: calc(100vh - 107px);
+}
+#palette-label-container > div.palette-label {
+    background-color: var(--page-background);
+    border-radius: 3px;
+}
+#palette-label-container > div.palette-label ~ div.palette-label {
+    margin-top: 9px;
+}
+#palette-label-container > div.palette-label > .palette-label-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1px 10px;
+    margin: 0;
 }

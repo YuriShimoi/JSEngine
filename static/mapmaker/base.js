@@ -1,6 +1,10 @@
 const MAPINITSIZE = {x: 41, y:23};
 var gridMap = new GridMap(MAPINITSIZE.x, MAPINITSIZE.y);
 var palette = null;
+var selected_palette = null; // -1 == new
+var palette_list = {};
+var palette_on_config = null;
+
 
 documentReady(() => {
     gridMap.init("#mapChess");
@@ -26,10 +30,18 @@ documentReady(() => {
     paletteImage.addEventListener("change", () => { paletteTextureUpdate(paletteImage) });
 
     let paletteConfig = document.getElementById("palette-config-grid");
-    new SpritePalette(paletteConfig, {x:24,y:24}).loadEmpty({x:5,y:10});
+    palette_on_config = new SpritePalette(paletteConfig, {x:24,y:24});
+    palette_on_config.loadEmpty({x:5,y:10});
+
+    document.getElementById("palette-form-confirm").addEventListener("click", () => {
+        savePalette();
+        togglePaletteWindow();
+    });
 });
 
-function togglePaletteWindow(event=null) {
+function togglePaletteWindow(plt=null, event=null) {
+    selected_palette = plt;
+
     if(event !== null && event.target !== event.currentTarget)
         return;
     document.getElementById("palette-container").toggleAttribute("hidden");
@@ -37,6 +49,30 @@ function togglePaletteWindow(event=null) {
 
     if(!document.getElementById("palette-container").hasAttribute("hidden"))
         refreshPaletteWindow();
+}
+
+function savePalette() {
+    let palette_name = document.getElementById("palette-form-name").value;
+    palette_name = palette_name !== ""? palette_name: null;
+
+    newPaletteLabel(palette_name);
+}
+
+function newPaletteLabel(pltName=null) {    
+    let container = document.getElementById("palette-label-container");
+    
+    let el_plt = document.createElement("div");
+    el_plt.classList.add("palette-label");
+    el_plt.id = `plt-${Object.keys(palette_list).length}`;
+
+    let el_plt_name = document.createElement("h4");
+    el_plt_name.classList.add("palette-label-title");
+    el_plt_name.innerHTML = pltName?? `palette-${Object.keys(palette_list).length+1}`;
+    el_plt.append(el_plt_name);
+    
+    container.append(el_plt);
+    palette_list[el_plt.id] = palette_on_config.getConfiguration();
+    // TODO: add to object SpritePalette an configuration import/export method
 }
 
 function refreshPaletteWindow() {

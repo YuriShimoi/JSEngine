@@ -65,9 +65,11 @@
                     <div>
                         <div>
                             <h3>Palettes</h3>
-                            <button class="btn-block" onclick="togglePaletteWindow()">New Palette</button>
+                            <button class="btn-block" onclick="togglePaletteWindow(-1)">New Palette</button>
                         </div>
-                        <div id="palette-container" class="floatercontainer" onclick="togglePaletteWindow(event)" hidden>
+                        <hr>
+                        <div id="palette-label-container"></div>
+                        <div id="palette-container" class="floatercontainer" onclick="togglePaletteWindow(null, event)" hidden>
                             <div id="palette-window" class="drawer">
                                 <header>
                                     <button class="float-right" onclick="togglePaletteWindow()">⨉</button>

@@ -119,6 +119,18 @@ class SpritePalette {
         this._instance.append(this._internal.createPalette(size));
         this._internal.bindTileEvents(this._instance);
     }
+
+    loadConfiguration(cnfg) {
+        // TODO
+    }
+
+    getConfiguration() {
+        let plt_config = [];
+
+        // TODO
+
+        return plt_config;
+    }
 }
 
 class GlobalSpritePaletteHolder {
