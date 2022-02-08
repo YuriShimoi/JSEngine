@@ -40,44 +40,90 @@ documentReady(() => {
 });
 
 function togglePaletteWindow(plt=null, event=null) {
-    selected_palette = plt;
-
     if(event !== null && event.target !== event.currentTarget)
         return;
+    
+    if(plt === null && selected_palette !== -1)
+        refreshPaletteWindow();
+
+    selected_palette = plt;
+
+    if(selected_palette !== null && selected_palette !== -1) {
+        palette_on_config.loadConfiguration(palette_list[selected_palette].config);
+        document.getElementById("palette-form-name").value = palette_list[selected_palette].name;
+    }
+
     document.getElementById("palette-container").toggleAttribute("hidden");
     GlobalSpritePaletteHolder.clear();
-
-    if(!document.getElementById("palette-container").hasAttribute("hidden"))
-        refreshPaletteWindow();
 }
 
 function savePalette() {
     let palette_name = document.getElementById("palette-form-name").value;
     palette_name = palette_name !== ""? palette_name: null;
 
-    newPaletteLabel(palette_name);
+    if(selected_palette === -1)
+        newPaletteLabel(palette_name);
+    else
+        updatePaletteLabel(palette_name);
+    selected_palette = null;
 }
 
-function newPaletteLabel(pltName=null) {    
+function newPaletteLabel(pltName=null) {
+    let palette_name = pltName?? `palette-${Object.keys(palette_list).length+1}`;
+
     let container = document.getElementById("palette-label-container");
     
     let el_plt = document.createElement("div");
     el_plt.classList.add("palette-label");
     el_plt.id = `plt-${Object.keys(palette_list).length}`;
 
+    let el_plt_header = document.createElement("div");
+    el_plt_header.classList.add("palette-label-header");
+    // HEADER
     let el_plt_name = document.createElement("h4");
     el_plt_name.classList.add("palette-label-title");
-    el_plt_name.innerHTML = pltName?? `palette-${Object.keys(palette_list).length+1}`;
-    el_plt.append(el_plt_name);
-    
+    el_plt_name.innerHTML = palette_name;
+    el_plt_header.append(el_plt_name);
+
+    let el_plt_edt = document.createElement("button");
+    el_plt_edt.classList.add("palette-label-button");
+    el_plt_edt.innerHTML = "E";
+    el_plt_edt.onclick = () => togglePaletteWindow(el_plt.id);
+    el_plt_header.append(el_plt_edt);
+
+    let el_plt_del = document.createElement("button");
+    el_plt_del.classList.add("palette-label-button");
+    el_plt_del.innerHTML = "X";
+    el_plt_header.append(el_plt_del);
+    // HEADER
+    el_plt.append(el_plt_header);
+
+    let el_plt_body = document.createElement("div");
+    el_plt_body.classList.add("palette-label-body");
+    el_plt.append(el_plt_body);
+
     container.append(el_plt);
-    palette_list[el_plt.id] = palette_on_config.getConfiguration();
-    // TODO: add to object SpritePalette an configuration import/export method
+    palette_list[el_plt.id] = {
+        'name'  : palette_name,
+        'config': palette_on_config.getConfiguration()
+    };
+}
+
+function updatePaletteLabel(pltName=null) {
+    palette_list[selected_palette].config = palette_on_config.getConfiguration();
+    if(pltName !== "" && pltName !== null) {
+        palette_list[selected_palette].name = pltName;
+        document.getElementById(selected_palette)
+                .getElementsByClassName("palette-label-title")[0]
+                .innerHTML = pltName;
+    }
 }
 
 function refreshPaletteWindow() {
     updatePaletteImages();
 
+    palette_on_config.clear();
+    document.getElementById("palette-form-name").value = "";
 }
 
 function updatePaletteImages() {

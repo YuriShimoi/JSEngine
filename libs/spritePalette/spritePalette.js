@@ -120,14 +120,43 @@ class SpritePalette {
         this._internal.bindTileEvents(this._instance);
     }
 
+    clear() {
+        let plt_tiles = this._instance.getElementsByClassName("sprite-palette-tile");
+        for(let pt=0 ; pt < plt_tiles.length; pt++) {
+            plt_tiles[pt].removeAttribute("style");
+        }
+    }
+
     loadConfiguration(cnfg) {
-        // TODO
+        this.loadEmpty(cnfg.size);
+
+        let plt_tiles = this._instance.getElementsByClassName("sprite-palette-tile");
+        for(let pt=0 ; pt < plt_tiles.length; pt++) {
+            let pt_clip = plt_tiles[pt].getAttribute("clip");
+            if(pt_clip in cnfg.tile) {
+                plt_tiles[pt].setAttribute("style", cnfg.tile[pt_clip]);
+            }
+        }
     }
 
     getConfiguration() {
-        let plt_config = [];
+        let plt_trs   = this._instance.getElementsByTagName("tr").length;
+        let plt_tiles = this._instance.getElementsByClassName("sprite-palette-tile");
 
-        // TODO
+        let plt_config = {
+            'size': {
+                'x': plt_tiles.length / plt_trs,
+                'y': plt_trs
+            },
+            'tile': {}
+        };
+
+        for(let pt=0 ; pt < plt_tiles.length; pt++) {
+            let pt_style = plt_tiles[pt].getAttribute("style");
+            if(pt_style !== null && pt_style !== "") {
+                plt_config.tile[plt_tiles[pt].getAttribute("clip")] = pt_style;
+            }
+        }
 
         return plt_config;
     }

@@ -263,9 +263,20 @@ label.file-input-span:active {
 #palette-label-container > div.palette-label ~ div.palette-label {
     margin-top: 9px;
 }
-#palette-label-container > div.palette-label > .palette-label-title {
+#palette-label-container > div.palette-label .palette-label-header {
+    display: flex;
+}
+#palette-label-container > div.palette-label .palette-label-header .palette-label-title {
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 1px 10px;
+    width: 100%;
     margin: 0;
+    font-weight: normal;
+}
+#palette-label-container > div.palette-label .palette-label-header .palette-label-button {
+    border: none;
+}
+#palette-label-container > div.palette-label .palette-label-header .palette-label-button:hover {
+    background-color: var(--page-background);
 }
