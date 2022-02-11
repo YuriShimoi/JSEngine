@@ -276,7 +276,23 @@ label.file-input-span:active {
 }
 #palette-label-container > div.palette-label .palette-label-header .palette-label-button {
     border: none;
+    background-color: transparent;
+    color: var(--tool-color);
+    cursor: pointer;
 }
 #palette-label-container > div.palette-label .palette-label-header .palette-label-button:hover {
-    background-color: var(--page-background);
+    background-color: transparent;
+    color: var(--tool-hover-color);
+}
+#palette-label-container > div.palette-label .palette-label-body {
+    overflow: auto;
+    text-align: center;
+    resize: vertical;
+    height: 50px;
+    min-height: 52px;
+    max-height: 520px;
+}
+
+#palette-label-container > div.palette-label .palette-label-body::-webkit-resizer {
+    background: linear-gradient(135deg, transparent 50%, #7773 51%);
 }

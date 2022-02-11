@@ -100,6 +100,9 @@ function newPaletteLabel(pltName=null) {
 
     let el_plt_body = document.createElement("div");
     el_plt_body.classList.add("palette-label-body");
+    // BODY
+    
+    // BODY
     el_plt.append(el_plt_body);
 
     container.append(el_plt);
