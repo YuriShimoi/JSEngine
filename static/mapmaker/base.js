@@ -87,13 +87,16 @@ function newPaletteLabel(pltName=null) {
 
     let el_plt_edt = document.createElement("button");
     el_plt_edt.classList.add("palette-label-button");
-    el_plt_edt.innerHTML = "E";
+    el_plt_edt.innerHTML = "⇗";
+    el_plt_edt.style.fontSize = "large";
+    el_plt_edt.style.lineHeight = "26px";
     el_plt_edt.onclick = () => togglePaletteWindow(el_plt.id);
     el_plt_header.append(el_plt_edt);
 
     let el_plt_del = document.createElement("button");
     el_plt_del.classList.add("palette-label-button");
-    el_plt_del.innerHTML = "X";
+    el_plt_del.innerHTML = "⨯";
+    el_plt_del.onclick = () => deletePaletteWindow(el_plt.id);
     el_plt_header.append(el_plt_del);
     // HEADER
     el_plt.append(el_plt_header);
@@ -101,7 +104,12 @@ function newPaletteLabel(pltName=null) {
     let el_plt_body = document.createElement("div");
     el_plt_body.classList.add("palette-label-body");
     // BODY
-    
+    let el_plt_spr = document.createElement("div");
+    el_plt_spr.classList.add("palette-label-spritesheet");
+    el_plt_spr.setAttribute("palette-draw", "false");
+    let el_plt_spr_config = new SpritePalette(el_plt_spr, {x:24,y:24});
+    el_plt_spr_config.loadConfiguration(palette_on_config.getConfiguration());
+    el_plt_body.append(el_plt_spr);
     // BODY
     el_plt.append(el_plt_body);
 
@@ -114,6 +122,13 @@ function newPaletteLabel(pltName=null) {
 
 function updatePaletteLabel(pltName=null) {
     palette_list[selected_palette].config = palette_on_config.getConfiguration();
+    
+    let plt_sheet = document.getElementById(selected_palette)
+                            .getElementsByClassName("palette-label-spritesheet")[0];
+    plt_sheet.innerHTML = "";
+    let plt_sheet_cfg = new SpritePalette(plt_sheet, {x:24,y:24});
+    plt_sheet_cfg.loadConfiguration(palette_on_config.getConfiguration());
+
     if(pltName !== "" && pltName !== null) {
         palette_list[selected_palette].name = pltName;
         document.getElementById(selected_palette)
@@ -127,6 +142,13 @@ function refreshPaletteWindow() {
 
     palette_on_config.clear();
     document.getElementById("palette-form-name").value = "";
+}
+
+function deletePaletteWindow(plt) {
+    if(confirm("Delete palette?")) {
+        palette_list[plt] = null;
+        document.getElementById(plt).remove();
+    }
 }
 
 function updatePaletteImages() {

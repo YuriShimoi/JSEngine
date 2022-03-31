@@ -175,23 +175,23 @@ class GlobalSpritePaletteHolder {
     
         static getParentWindow(tile) {
             let parentWindow = tile.parentElement;
-            while(!parentWindow.classList.contains("palette-window-grid")) {
+            while(!parentWindow.classList.contains("sprite-palette-container")) {
                 parentWindow = parentWindow.parentElement;
             }
-            return parentWindow;
+            return parentWindow.parentElement;
         }
     }
 
     static click(tile) {
         let parentWindow = this._internal.getParentWindow(tile);
         if(this._holdTile === null) {
-            if(parentWindow.getAttribute("--palette-select") === "false")
+            if(parentWindow.getAttribute("palette-select") === "false")
                 this._internal.clear(tile);
             else
                 this.hold(tile);
         }
         else {
-            if(parentWindow.getAttribute("--palette-draw") === "false")
+            if(parentWindow.getAttribute("palette-draw") === "false")
                 this.hold(tile);
             else
                 this._internal.draw(tile);

@@ -279,6 +279,7 @@ label.file-input-span:active {
     background-color: transparent;
     color: var(--tool-color);
     cursor: pointer;
+    font-size: x-large;
 }
 #palette-label-container > div.palette-label .palette-label-header .palette-label-button:hover {
     background-color: transparent;
@@ -289,10 +290,19 @@ label.file-input-span:active {
     text-align: center;
     resize: vertical;
     height: 50px;
-    min-height: 52px;
-    max-height: 520px;
+    min-height: 50px;
+    max-height: 518px;
+    background: linear-gradient(to left, var(--page-background) 20px, var(--page-background-secondary) 10px);
 }
 
 #palette-label-container > div.palette-label .palette-label-body::-webkit-resizer {
     background: linear-gradient(135deg, transparent 50%, #7773 51%);
+}
+
+#palette-label-container > div.palette-label .palette-label-body::-webkit-scrollbar {
+    width: 16px;
+}
+
+#palette-label-container > div.palette-label .palette-label-body::-webkit-scrollbar-thumb {
+    background: transparent;
 }
