@@ -42,7 +42,7 @@ class SpritePalette {
         }
 
         static loadPalette(imageLoad, clip, parent, imageBinary) {
-            const TILESIZE  = 50;
+            const TILESIZE  = 48;
 
             let minors = {
                 'x': Math.floor(imageLoad.width / clip.x),
@@ -164,6 +164,7 @@ class SpritePalette {
 
 class GlobalSpritePaletteHolder {
     static _holdTile = null;
+    static _triggerRegister = [];
     static _internal = class InternalGlobalSpritePaletteHolder {
         static draw(tile) {
             return tile.setAttribute("style", GlobalSpritePaletteHolder._holdTile.getAttribute("style"));
@@ -196,6 +197,8 @@ class GlobalSpritePaletteHolder {
             else
                 this._internal.draw(tile);
         }
+
+        GlobalSpritePaletteHolder._triggerRegister.forEach(f => f());
     }
 
     static hold(tile) {
@@ -217,5 +220,9 @@ class GlobalSpritePaletteHolder {
         for(let thl=0; thl < tile_holder_list.length; thl++) {
             tile_holder_list[thl].classList.remove("sprite-palette-holder");
         }
+    }
+
+    static clickTrigger(f) {
+        GlobalSpritePaletteHolder._triggerRegister.push(f);
     }
 }

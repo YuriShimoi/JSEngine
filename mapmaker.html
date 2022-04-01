@@ -41,6 +41,12 @@
                 <a href="index.html" onclick="return confirm('Leave page? You will lost all progress.')">◀</a>
                 <hr>
                 
+                <ul id="drawing-tools">
+                    <li><span id="tool-tile" active></span></li>
+                    <li><span id="tool-pen" class="draw-tool" active>Pen</span></li>
+                    <li><span id="tool-area" class="draw-tool">Area</span></li>
+                </ul>
+                
             </div>
 
             <div id="page-drawers" class="multi-drawer drawer-left drawer-closed">
@@ -91,7 +97,7 @@
                                         <select id="palette-form-texture"><option value="-1" selected disabled>Select Image</option></select>
                                         <div id="palette-loader-grid" class="palette-window-grid" palette-draw="false"></div>
                                     </div>
-                                    <div style="min-width: 266px; max-width: 266px;">
+                                    <div style="min-width: 256px; max-width: 256px;">
                                         <h4 class="palette-window-grid-title">Palette</h4>
                                         <div id="palette-config-grid" class="palette-window-grid" palette-select="false"></div>
                                     </div>

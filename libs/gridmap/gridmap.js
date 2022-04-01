@@ -57,7 +57,7 @@ class GridMap {
             generatedGrid.setAttribute("onmouseup",    "GridMapHandler.cursor('up',    event, this)");
             generatedGrid.setAttribute("onmouseleave", "GridMapHandler.cursor('leave', event, this)");
 
-            this.reZoom(size, 50, mapping, generatedGrid);
+            this.reZoom(size, 48, mapping, generatedGrid);
             this.removeOutOfGrid(size, mapping);
 
             return generatedGrid;
@@ -119,7 +119,7 @@ class GridMap {
     constructor(sizeX, sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        this._zoom = 50;
+        this._zoom = 48;
 
         this._uuid = [...(new Date().toJSON())].sort(_=>Math.random()-.5).join('');
         GridMapHandler._instanceHolder[this._uuid] = this;

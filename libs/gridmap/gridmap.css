@@ -33,13 +33,13 @@
 }
 
 .gridmap-grid {
-    --grid-zoom: 50px;
+    --grid-zoom: 48px;
     --grid-chess-trick-x: 0;
     --grid-chess-trick-y: 0;
     display: block;
     overflow: hidden;
     background: repeating-conic-gradient(var(--gridmap-disabled-background) 0% 25%, var(--gridmap-background) 0% 50%) 
-        calc(var(--grid-chess-trick-x) * 50px) calc(var(--grid-chess-trick-y) * 50px) /
+        calc(var(--grid-chess-trick-x) * var(--grid-zoom)) calc(var(--grid-chess-trick-y) * var(--grid-zoom)) /
         calc(var(--grid-zoom) * 2) calc(var(--grid-zoom) * 2);
     
     transition: all 200ms ease;

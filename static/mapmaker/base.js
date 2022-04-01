@@ -37,6 +37,50 @@ documentReady(() => {
         savePalette();
         togglePaletteWindow();
     });
+
+    GlobalSpritePaletteHolder.clickTrigger(() => {
+        let hold_parent = GlobalSpritePaletteHolder._holdTile?.parentElement?? null;
+        while(hold_parent !== null
+            && hold_parent.id != "palette-label-container"
+            && hold_parent.tagName != "BODY") {
+            hold_parent = hold_parent.parentElement;
+        }
+        if(hold_parent === null || hold_parent.id === "palette-label-container") {
+            document.getElementById("tool-tile").innerHTML = "";
+            if(hold_parent !== null) {
+                let ttile = document.createElement("span");
+                
+                let sizeConvert = (strSize) => (strSize.slice(0, -2)/48*40 + "px");
+                ttile.style.setProperty(
+                    "background-image",
+                    GlobalSpritePaletteHolder._holdTile.style.backgroundImage
+                );
+                ttile.style.setProperty(
+                    "background-size",
+                    GlobalSpritePaletteHolder._holdTile
+                    .style.backgroundSize.split(' ').map(s => sizeConvert(s)).join(' ')
+                );
+                ttile.style.setProperty(
+                    "background-position",
+                    GlobalSpritePaletteHolder._holdTile
+                    .style.backgroundPosition.split(' ').map(s => sizeConvert(s)).join(' ')
+                );
+                
+                document.getElementById("tool-tile").append(ttile);
+            }
+        }
+    });
+
+    let draw_tools = document.getElementById("drawing-tools")
+                             .getElementsByClassName("draw-tool");
+    for(let dt=0; dt < draw_tools.length; dt++) {
+        draw_tools[dt].onclick = (e) => {
+            e.target.parentElement.parentElement
+                    .querySelectorAll(".draw-tool[active]")
+                    .forEach(drt => drt.removeAttribute("active"));
+            e.target.setAttribute("active", true);
+        };
+    }
 });
 
 function togglePaletteWindow(plt=null, event=null) {
@@ -107,8 +151,10 @@ function newPaletteLabel(pltName=null) {
     let el_plt_spr = document.createElement("div");
     el_plt_spr.classList.add("palette-label-spritesheet");
     el_plt_spr.setAttribute("palette-draw", "false");
+
     let el_plt_spr_config = new SpritePalette(el_plt_spr, {x:24,y:24});
     el_plt_spr_config.loadConfiguration(palette_on_config.getConfiguration());
+
     el_plt_body.append(el_plt_spr);
     // BODY
     el_plt.append(el_plt_body);
