@@ -81,6 +81,29 @@ documentReady(() => {
             e.target.setAttribute("active", true);
         };
     }
+
+    let layer_input = document.getElementById("tool-layer")
+                              .getElementsByTagName("input")[0];
+    layer_input.onkeydown = (e) => {
+        let li_val = Number(e.target.value);
+        let li_min = Number(e.target.min);
+        let li_max = Number(e.target.max);
+
+        let last_value = li_val;
+        if(li_val < li_min) last_value = li_min;
+        if(li_val > li_max) last_value = li_max;
+        
+        e.target.setAttribute("lastValue", last_value);
+    };
+    layer_input.onkeyup = (e) => {
+        let li_val = Number(e.target.value);
+        let li_min = Number(e.target.min);
+        let li_max = Number(e.target.max);
+        if(li_val < li_min || li_val > li_max) {
+            let li_last_value = Number(e.target.getAttribute("lastValue"));
+            e.target.value = li_last_value;
+        }
+    };
 });
 
 function togglePaletteWindow(plt=null, event=null) {

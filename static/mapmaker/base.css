@@ -91,6 +91,10 @@ h1, h2, h3 {
 #tools-drawer hr {
     border-color: lightgray;
 }
+#tools-drawer hr + hr {
+    margin-top: -8px;
+}
+
 
 #tools-drawer a {
     display: inline-block;
@@ -125,10 +129,10 @@ h1, h2, h3 {
 
 #tools-drawer #drawing-tools li > span {
     --square-size: 40px;
-    font-size: medium;
+    font-size: x-large;
     width: var(--square-size);
     height: var(--square-size);
-    line-height: var(--square-size);
+    line-height: 43px;
     border-radius: 50%;
     overflow: visible;
     cursor: pointer;
@@ -163,6 +167,7 @@ h1, h2, h3 {
     color: var(--tool-hover-color);
     width: fit-content;
     position: fixed;
+    font-size: medium;
     left: 45px;
     opacity: 0;
     padding: 0 5px;
@@ -191,6 +196,21 @@ h1, h2, h3 {
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+}
+
+#tools-drawer #drawing-tools li > span#tool-layer {
+    height: 22px;
+    line-height: 22px;
+}
+#tools-drawer #drawing-tools li > span#tool-layer::before {
+    margin-top: 0;
+}
+#tools-drawer #drawing-tools li > span#tool-layer input {
+    border: none;
+    background: transparent;
+    width: 30px;
+    text-align: center;
+    padding: 0 5px;
 }
 
 
