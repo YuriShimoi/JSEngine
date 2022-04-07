@@ -154,7 +154,7 @@ class GridMap {
         return this._zoom;
     }
 
-    newTile(x, y) {
+    newTile(x, y, style=null) {
         if((x >= this.sizeX || x < 0) || (y >= this.sizeY || y < 0)) {
             console.warn(`Invalid tile position, out of bounds. [${x},${y}]`);
             return null;
@@ -230,7 +230,7 @@ class GridMapHandler {
     }
 
     static cursor(type, event, element) {
-        let gridMapCursor = element.getElementsByClassName("gridmap-cursor")[0];
+        let gridMapCursor   = element.getElementsByClassName("gridmap-cursor")[0];
         let gridMapInstance = this.getElementGridMapInstance(element);
         let gridMapCursorPos;
         switch(type) {
@@ -246,13 +246,17 @@ class GridMapHandler {
                     gridMapCursor.toggleAttribute("animated");
                     setTimeout(()=>{
                         gridMapCursor.toggleAttribute("animated");
-                    },1);
+                    }, 1);
                 }
 
-                if(GridMapHandler._cursorHolder.mode === 0) {
-                    // event.offsetX - GridMapHandler._cursorHolder.x;
-                    // event.offsetY - GridMapHandler._cursorHolder.y;
-                    
+                if(GridMapHandler._cursorHolder.mode === 0
+                && GridMapHandler._cursorHolder.x !== null
+                && GridMapHandler._cursorHolder.y !== null) {
+                    let cursorNewPos = {
+                        x: event.offsetX - GridMapHandler._cursorHolder.x,
+                        y: event.offsetY - GridMapHandler._cursorHolder.y
+                    };
+
                 }
                 break;
             case "down":
