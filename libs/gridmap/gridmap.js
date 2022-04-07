@@ -191,6 +191,11 @@ class GridMap {
 
 class GridMapHandler {
     static _instanceHolder = {};
+    static _cursorHolder   = {
+        mode: 0,
+        x:null,
+        y:null
+    };
 
     static getElementGridMapInstance(e) {
         let findParentGridContent = (childElement) => {
@@ -233,7 +238,7 @@ class GridMapHandler {
                 gridMapCursorPos = {
                     x: event.offsetX - (event.offsetX % gridMapInstance._zoom),
                     y: event.offsetY - (event.offsetY % gridMapInstance._zoom)
-                }
+                };
                 if(gridMapCursor.style.left != `${gridMapCursorPos.x}px`
                 || gridMapCursor.style.top  != `${gridMapCursorPos.y}px`) {
                     gridMapCursor.style.left = `${gridMapCursorPos.x}px`;
@@ -243,18 +248,32 @@ class GridMapHandler {
                         gridMapCursor.toggleAttribute("animated");
                     },1);
                 }
+
+                if(GridMapHandler._cursorHolder.mode === 0) {
+                    // event.offsetX - GridMapHandler._cursorHolder.x;
+                    // event.offsetY - GridMapHandler._cursorHolder.y;
+                    
+                }
                 break;
             case "down":
-
+                console.log("click");
+                if(GridMapHandler._cursorHolder.mode === 0) {
+                    GridMapHandler._cursorHolder.x = event.offsetX;
+                    GridMapHandler._cursorHolder.y = event.offsetY;
+                }
                 break;
             case "up":
-
+                console.log("unclick");
+                if(GridMapHandler._cursorHolder.mode === 0) {
+                    GridMapHandler._cursorHolder.x = null;
+                    GridMapHandler._cursorHolder.y = null;
+                }
                 break;
             case "leave":
                 gridMapCursorPos = {
                     x: gridMapInstance._zoom * -2,
                     y: gridMapInstance._zoom * -2
-                }
+                };
                 gridMapCursor.style.left = `${gridMapCursorPos.x}px`;
                 gridMapCursor.style.top = `${gridMapCursorPos.y}px`;
                 break;

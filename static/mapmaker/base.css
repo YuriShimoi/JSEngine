@@ -162,26 +162,32 @@ h1, h2, h3 {
 }
 
 #tools-drawer #drawing-tools li > span::before {
-    content: attr(tag);
+    content: "";
     display: inline-block;
     color: var(--tool-hover-color);
-    width: fit-content;
+    width: 0px;
     position: fixed;
     font-size: medium;
-    left: 45px;
+    left: 40px;
     opacity: 0;
-    padding: 0 5px;
+    padding: 0;
     height: 22px;
     line-height: 22px;
     background: var(--page-background);
     border-radius: 5px;
     margin-top: 10px;
 
-    transition: left 100ms ease, opacity 200ms ease;
+    transition: left    150ms ease,
+                opacity 200ms ease,
+                width   200ms ease,
+                padding 200ms ease;
 }
 #tools-drawer #drawing-tools li > span:hover::before {
     left: 55px;
     opacity: 1;
+    content: attr(tag);
+    width: fit-content;
+    padding: 0 5px;
 }
 
 #tools-drawer #drawing-tools li > span#tool-tile {
