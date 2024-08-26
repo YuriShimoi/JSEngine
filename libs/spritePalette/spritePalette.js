@@ -164,6 +164,7 @@ class SpritePalette {
 
 class GlobalSpritePaletteHolder {
     static _holdTile = null;
+    static _holdPallete = null;
     static _triggerRegister = [];
     static _internal = class InternalGlobalSpritePaletteHolder {
         static draw(tile) {
@@ -205,17 +206,20 @@ class GlobalSpritePaletteHolder {
         if(this._holdTile == tile) {
             this._holdTile.classList.remove("sprite-palette-holder");
             this._holdTile = null;
+            this._holdPallete = null;
         }
         else {
             if(this._holdTile != null)
                 this._holdTile.classList.remove("sprite-palette-holder");
             this._holdTile = tile;
             this._holdTile.classList.add("sprite-palette-holder");
+            this._holdPallete = this._internal.getParentWindow(tile).parentElement.parentElement.id;
         }
     }
 
     static clear() {
         this._holdTile = null;
+        this._holdPallete = null;
         let tile_holder_list = document.querySelectorAll(".sprite-palette-container .sprite-palette-tile.sprite-palette-holder");
         for(let thl=0; thl < tile_holder_list.length; thl++) {
             tile_holder_list[thl].classList.remove("sprite-palette-holder");

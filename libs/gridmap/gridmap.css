@@ -95,7 +95,11 @@
     width: var(--grid-zoom);
     height: var(--grid-zoom);
     pointer-events: none;
-    z-index: 2;
+    
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
     
     transition: all 200ms ease;
 }

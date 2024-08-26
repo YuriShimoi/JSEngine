@@ -8,7 +8,7 @@ var palette_on_config = null;
 
 documentReady(() => {
     gridMap.init("#mapChess");
-    gridMap.newTile(20, 11);
+    // gridMap.newTile(20, 11);
 
     let darkThemeBtn = document.getElementById("dark-theme");
     darkThemeBtn.classList.add("dark-active");
@@ -79,6 +79,7 @@ documentReady(() => {
                     .querySelectorAll(".draw-tool[active]")
                     .forEach(drt => drt.removeAttribute("active"));
             e.target.setAttribute("active", true);
+            GridMapHandler._cursorHolder.mode = Number(e.target.getAttribute("mode"));
         };
     }
 
@@ -103,6 +104,12 @@ documentReady(() => {
             let li_last_value = Number(e.target.getAttribute("lastValue"));
             e.target.value = li_last_value;
         }
+    };
+
+    let visib_input = document.getElementById("tool-visibility");
+    visib_input.onclick = () => {
+        visib_input.toggleAttribute("active");
+        // visib_input.hasAttribute("active");
     };
 });
 

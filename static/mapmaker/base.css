@@ -219,6 +219,22 @@ h1, h2, h3 {
     padding: 0 5px;
 }
 
+#tools-drawer #drawing-tools li > span#tool-visibility {
+    height: 22px;
+    line-height: 24px;
+    font-size: 20px;
+}
+#tools-drawer #drawing-tools li > span#tool-visibility::before {
+    margin-top: 0;
+}
+#tools-drawer #drawing-tools li > span#tool-visibility::after {
+    content: "—";
+    display: inline-block;
+}
+#tools-drawer #drawing-tools li > span#tool-visibility[active]::after {
+    content: "👁";
+}
+
 
 
 .flexible-drawer-content {

@@ -44,10 +44,12 @@
                 <ul id="drawing-tools">
                     <li><span id="tool-tile" tag="Tile" active></span></li>
                     <li><span id="tool-layer" tag="Layer" active><input type="number" min="0" max="99" value="2"></span></li>
+                    <li><span id="tool-visibility" tag="Visibility" active></span></li>
                     <hr>
-                    <li><span id="tool-move" class="draw-tool" tag="Cursor" active>☩</span></li>
-                    <li><span id="tool-pen" class="draw-tool" tag="Pencil">⇗</span></li>
-                    <li><span id="tool-area" class="draw-tool" tag="Area">▧</span></li>
+                    <li><span id="tool-move" class="draw-tool" tag="Cursor" mode="0" active>☩</span></li>
+                    <li><span id="tool-pen" class="draw-tool" tag="Pencil" mode="1">⇗</span></li>
+                    <li><span id="tool-pen" class="draw-tool" tag="Eraser" mode="-1">×</span></li>
+                    <li><span id="tool-area" class="draw-tool" tag="Area" mode="2">▧</span></li>
                 </ul>
                 
             </div>
