@@ -175,6 +175,8 @@ class GridMap {
 
         this._instance.querySelector(".gridmap-grid").append(newBlankTile);
         
+        this.delTile(x, y, z);
+
         this._mapping.push({
             element: newBlankTile,
             pos: {x: x, y: y, z: z}
