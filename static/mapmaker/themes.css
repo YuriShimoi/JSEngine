@@ -23,7 +23,7 @@
     --gridmap-primary-white: #151515;
     --gridmap-secondary-white: var(--page-background-secondary);
     --gridmap-highlight: #0051ff;
-    --gridmap-placehold-color: turquoise;
+    --gridmap-placehold-color: transparent;
     
     --gridmap-tile-background: var(--gridmap-placehold-color);
     --gridmap-cursor-color: var(--gridmap-highlight);

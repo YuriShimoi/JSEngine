@@ -53,6 +53,12 @@ class GridMap {
             gridMapCursor.classList.add("gridmap-cursor");
             gridMapCursor.setAttribute("animated", "true");
             generatedGrid.append(gridMapCursor);
+
+            let gridMapSelector = document.createElement("div");
+            gridMapSelector.classList.add("gridmap-selector");
+            gridMapSelector.setAttribute("animated", "true");
+            generatedGrid.append(gridMapSelector);
+
             generatedGrid.setAttribute("onmousemove",  "GridMapHandler.cursor('move',  event, this)");
             generatedGrid.setAttribute("onmousedown",  "GridMapHandler.cursor('down',  event, this)");
             generatedGrid.setAttribute("onmouseup",    "GridMapHandler.cursor('up',    event, this)");
@@ -212,10 +218,8 @@ class GridMap {
 
         let foundTile = this.getTile(x, y, z);
         if(foundTile !== null) {
-            console.log('found', foundTile);
             foundTile.element.remove();
             this._mapping = this._mapping.filter(tle => !(tle.pos.x == x && tle.pos.y == y && tle.pos.z == z));
-            console.log(this._mapping);
         }
     }
 
@@ -239,6 +243,12 @@ class GridMapHandler {
         mode: 0,
         x:null,
         y:null
+    };
+    static _selectorHolder = {
+        x1: null,
+        y1: null,
+        x2: null,
+        y2: null
     };
 
     static getElementGridMapInstance(e) {
@@ -275,6 +285,7 @@ class GridMapHandler {
 
     static cursor(type, event, element) {
         let gridMapCursor   = element.getElementsByClassName("gridmap-cursor")[0];
+        let gridMapSelector = element.getElementsByClassName("gridmap-selector")[0];
         let gridMapInstance = this.getElementGridMapInstance(element);
         let gridMapCursorPos;
         let tileRelativePos = gridMapInstance.getTilePos(event.offsetX, event.offsetY);
@@ -303,9 +314,31 @@ class GridMapHandler {
                     };
                     gridMapInstance.move(cursorNewPos.x, cursorNewPos.y);
                 }
+                else if(GridMapHandler._cursorHolder.mode === 2 && GridMapHandler._selectorHolder.x1 && GridMapHandler._selectorHolder.y1) {
+                    GridMapHandler._selectorHolder.x2 = event.offsetX - (event.offsetX % gridMapInstance._zoom);
+                    GridMapHandler._selectorHolder.y2 = event.offsetY - (event.offsetY % gridMapInstance._zoom);
+
+                    let xdiff = Math.abs(GridMapHandler._selectorHolder.x1 - GridMapHandler._selectorHolder.x2);
+                    let ydiff = Math.abs(GridMapHandler._selectorHolder.y1 - GridMapHandler._selectorHolder.y2);
+                    if(GridMapHandler._selectorHolder.x1 < GridMapHandler._selectorHolder.x2) {
+                        gridMapSelector.style.left = `${GridMapHandler._selectorHolder.x1}px`;
+                    }
+                    else {
+                        gridMapSelector.style.left = `${GridMapHandler._selectorHolder.x2}px`;
+                    }
+                    if(GridMapHandler._selectorHolder.y1 < GridMapHandler._selectorHolder.y2) {
+                        gridMapSelector.style.top = `${GridMapHandler._selectorHolder.y1}px`;
+                    }
+                    else {
+                        gridMapSelector.style.top = `${GridMapHandler._selectorHolder.y2}px`;
+                    }
+                    gridMapSelector.style.width = `${gridMapInstance._zoom + xdiff}px`;
+                    gridMapSelector.style.height = `${gridMapInstance._zoom + ydiff}px`;
+                    gridMapSelector.style.marginBottom = `-${gridMapInstance._zoom + ydiff}px`;
+                }
                 break;
             case "down":
-                console.log("click", tileRelativePos);
+                // console.log("click", tileRelativePos);
                 if(GridMapHandler._cursorHolder.mode === 0) {
                     GridMapHandler._cursorHolder.x = event.offsetX;
                     GridMapHandler._cursorHolder.y = event.offsetY;
@@ -316,9 +349,7 @@ class GridMapHandler {
                     let layer = document.getElementById("tool-layer")
                                         .getElementsByTagName("input")[0].value;
                     gridMapInstance.newTile(
-                        tileRelativePos.x,
-                        tileRelativePos.y,
-                        layer,
+                        tileRelativePos.x, tileRelativePos.y, layer,
                         GlobalSpritePaletteHolder._holdTile.getAttribute("style")
                     );
                 }
@@ -326,6 +357,21 @@ class GridMapHandler {
                     let layer = document.getElementById("tool-layer")
                                         .getElementsByTagName("input")[0].value;
                     gridMapInstance.delTile(tileRelativePos.x, tileRelativePos.y, layer);
+                }
+                else if(GridMapHandler._cursorHolder.mode === 2) {
+                    GridMapHandler._selectorHolder = {
+                        x1: event.offsetX - (event.offsetX % gridMapInstance._zoom),
+                        y1: event.offsetY - (event.offsetY % gridMapInstance._zoom),
+                        x2: event.offsetX - (event.offsetX % gridMapInstance._zoom),
+                        y2: event.offsetY - (event.offsetY % gridMapInstance._zoom)
+                    };
+
+                    gridMapSelector.style.left = `${GridMapHandler._selectorHolder.x1}px`;
+                    gridMapSelector.style.top  = `${GridMapHandler._selectorHolder.y1}px`;
+                    gridMapSelector.toggleAttribute("animated");
+                    setTimeout(()=>{
+                        gridMapSelector.toggleAttribute("animated");
+                    }, 1);
                 }
                 break;
             case "leave":
@@ -335,12 +381,51 @@ class GridMapHandler {
                     };
                     gridMapCursor.style.left = `${gridMapCursorPos.x}px`;
                     gridMapCursor.style.top = `${gridMapCursorPos.y}px`;
+
+                    GridMapHandler._selectorHolder = { x1: null, y1: null, x2: null, y2: null };
+                    gridMapSelector.style.left = `${gridMapInstance._zoom * -2}px`;
+                    gridMapSelector.style.top = `${gridMapInstance._zoom * -2}px`;
+
                 if(GridMapHandler._cursorHolder.x === null && GridMapHandler._cursorHolder.y === null) break;
             case "up":
-                console.log("unclick", tileRelativePos);
+                // console.log("unclick", tileRelativePos);
                 if(GridMapHandler._cursorHolder.mode === 0) {
                     GridMapHandler._cursorHolder.x = null;
                     GridMapHandler._cursorHolder.y = null;
+                }
+                else if(GridMapHandler._cursorHolder.mode === 2) {
+                    if(GlobalSpritePaletteHolder._holdTile) {
+                        let layer = document.getElementById("tool-layer")
+                                            .getElementsByTagName("input")[0].value;
+                        
+                        let lowerX = GridMapHandler._selectorHolder.x2;
+                        let biggerX = GridMapHandler._selectorHolder.x1;
+                        if(GridMapHandler._selectorHolder.x1 < GridMapHandler._selectorHolder.x2) {
+                            lowerX = GridMapHandler._selectorHolder.x1;
+                            biggerX = GridMapHandler._selectorHolder.x2;
+                        }
+                        let lowerY = GridMapHandler._selectorHolder.y2;
+                        let biggerY = GridMapHandler._selectorHolder.y1;
+                        if(GridMapHandler._selectorHolder.y1 < GridMapHandler._selectorHolder.y2) {
+                            lowerY = GridMapHandler._selectorHolder.y1;
+                            biggerY = GridMapHandler._selectorHolder.y2;
+                        }
+                        for(let py=lowerY; py <= biggerY; py+=gridMapInstance._zoom) {
+                            for(let px=lowerX; px <= biggerX; px+=gridMapInstance._zoom) {
+                                gridMapInstance.newTile(
+                                    (px / gridMapInstance._zoom), (py / gridMapInstance._zoom), layer,
+                                    GlobalSpritePaletteHolder._holdTile.getAttribute("style")
+                                );
+                            }
+                        }
+                    }
+
+                    GridMapHandler._selectorHolder = { x1: null, y1: null, x2: null, y2: null };
+                    gridMapSelector.style.left = `${gridMapInstance._zoom * -50}px`;
+                    gridMapSelector.style.top = `${gridMapInstance._zoom * -50}px`;
+                    gridMapSelector.style.width = `${gridMapInstance._zoom}px`;
+                    gridMapSelector.style.height = `${gridMapInstance._zoom}px`;
+                    gridMapSelector.style.marginBottom = `-${gridMapInstance._zoom}px`;
                 }
                 break;
         }

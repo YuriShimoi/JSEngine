@@ -5,10 +5,12 @@
     --gridmap-primary-white: #fff;
     --gridmap-secondary-white: #f2f2f2;
     --gridmap-highlight: #4b84ff;
-    --gridmap-placehold-color: turquoise;
+    --gridmap-highlight-secondary: #ffcd28;
+    --gridmap-placehold-color: transparent;
     
     --gridmap-tile-background: var(--gridmap-placehold-color);
     --gridmap-cursor-color: var(--gridmap-highlight);
+    --gridmap-selector-color: var(--gridmap-highlight-secondary);
     --gridmap-background: var(--gridmap-primary-white);
     --gridmap-disabled-background: var(--gridmap-secondary-white);
     --gridmap-border: var(--gridmap-primary-gray);
@@ -104,9 +106,10 @@
     transition: all 200ms ease;
 }
 
-.gridmap-grid .gridmap-cursor {
+.gridmap-grid .gridmap-cursor,
+.gridmap-grid .gridmap-selector {
     --cursor-border: 3px;
-    z-index: 5;
+    z-index: 101;
     position: relative;
     /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow: 0 0 0 2px var(--gridmap-cursor-color);
@@ -129,5 +132,10 @@
 .gridmap-grid .gridmap-cursor[animated] {
     /* offset-x | offset-y | blur-radius | spread-radius | color */
     box-shadow: 0 0 0 var(--cursor-border) var(--gridmap-cursor-color);
+    transition: box-shadow ease 100ms;
+}
+
+.gridmap-grid .gridmap-selector[animated] {
+    box-shadow: 0 0 0 var(--cursor-border) var(--gridmap-selector-color);
     transition: box-shadow ease 100ms;
 }
