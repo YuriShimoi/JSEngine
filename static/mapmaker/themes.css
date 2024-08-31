@@ -1,16 +1,17 @@
 [dark-theme="true"] {
     --hr-color: #444;
-    --page-background: #222;
-    --page-background-secondary: #191919;
+    --page-background: #222225;
+    --page-background-secondary: #1f1f21;
+    --page-border-color: #333;
     --page-color: #fff;
     --tool-color: #777;
     --tool-hover-color: #fff;
 
     --input-border: #090909;
-    --input-color: #ccc;
+    --input-color: #81818c;
     --input-placeholder-color: #666;
     --input-background: #222;
-    --button-color-hover: #fff;
+    --button-color-hover: #a1a1ac;
     --button-background-hover: #151515;
     --button-background-active: #111;
     
@@ -20,7 +21,7 @@
     --gridmap-primary-black: #eee;
     --gridmap-primary-gray: #555555;
     --gridmap-secondary-gray: #777;
-    --gridmap-primary-white: #171717;
+    --gridmap-primary-white: #1d1d1f;
     --gridmap-secondary-white: var(--page-background-secondary);
     --gridmap-highlight: #0051ff;
     --gridmap-placehold-color: transparent;

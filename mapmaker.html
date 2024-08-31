@@ -39,21 +39,19 @@
             <div id="mapChess"></div>
         </div>
         <div id="hud">
-            <div id="tools-drawer" class="drawer drawer-left">
-                <a href="index.html" onclick="return confirm('Leave page? You will lost all progress.')">◀</a>
-                <hr>
-                
+            <div id="tools-drawer">
+                <!-- <a href="index.html" onclick="return confirm('Leave page? You will lost all progress.')">◀</a>
+                <hr> -->
                 <ul id="drawing-tools">
-                    <li><span id="tool-tile" tag="Tile" active></span></li>
-                    <li><span id="tool-layer" tag="Layer" active><input type="number" min="0" max="99" value="1"></span></li>
-                    <li><span id="tool-visibility" tag="Visibility" active></span></li>
-                    <hr>
-                    <li><span id="tool-move" class="draw-tool" tag="Cursor" mode="0" active><i class="fa-solid fa-up-down-left-right"></i></span></li>
-                    <li><span id="tool-pen" class="draw-tool" tag="Pencil" mode="1"><i class="fa-solid fa-pencil"></i></span></li>
-                    <li><span id="tool-pen" class="draw-tool" tag="Eraser" mode="-1"><i class="fa-solid fa-eraser"></i></span></li>
-                    <li><span id="tool-area" class="draw-tool" tag="Area" mode="2"><i class="fa-solid fa-vector-square"></i></span></li>
+                    <li><span id="tool-tile" tag="Tile"></span></li>
+                    <!-- <li><span id="tool-layer" tag="Layer" active><input type="number" min="0" max="99" value="1"></span></li>
+                    <li><span id="tool-visibility" tag="Visibility" active></span></li> -->
+                    <!-- <hr> -->
+                    <li><span id="tool-pen" class="draw-tool" mode="1"><i class="fa-solid fa-pencil"></i></span></li>
+                    <li><span id="tool-pen" class="draw-tool" mode="-1"><i class="fa-solid fa-eraser"></i></span></li>
+                    <li><span id="tool-area" class="draw-tool" mode="2"><i class="fa-solid fa-vector-square"></i></span></li>
+                    <li><span id="tool-move" class="draw-tool" mode="0" active><i class="fa-solid fa-up-down-left-right"></i></span></li>
                 </ul>
-                
             </div>
 
             <div id="page-drawers" class="multi-drawer drawer-left drawer-closed">
@@ -126,6 +124,7 @@
 
                 <div class="drawer" id="layer-drawer">
                     <h3>Layers</h3>
+                    <span id="tool-layer" tag="Layer" active><input type="number" min="0" max="99" value="1"></span>
                 </div>
 
                 <div class="drawer" id="export-drawer">

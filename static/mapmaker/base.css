@@ -62,7 +62,7 @@ h1, h2, h3 {
 #page-drawers {
     z-index: 2;
     width: 30%;
-    max-width: 300px;
+    max-width: 282px;
     min-width: 200px;
 }
 
@@ -71,12 +71,17 @@ h1, h2, h3 {
     --tool-color-transition-type: ease;
     --tool-color-transition: color var(--tool-color-transition-time) var(--tool-color-transition-type);
     z-index: 10;
-    width: 50px;
+    width: fit-content;
+    height: fit-content;
     padding: 10px 0;
     color: var(--tool-color);
-    /* overflow: hidden; */
-    position: relative;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
+    display: flex;
+    align-items: center;
 }
 
 #tools-drawer hr {
@@ -105,17 +110,22 @@ h1, h2, h3 {
 
 
 #tools-drawer #drawing-tools {
-    list-style-type: none;
-    padding: 0;
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    background: var(--page-background);
+    height: inherit;
+    border: 1px solid var(--page-border-color);
+    box-shadow: #00000013 0 0 0 3px;
+    border-radius: 8px;
     overflow: hidden;
-    margin-top: 5px;
 }
 
 #tools-drawer #drawing-tools li {
     display: flex;
+    height: 100%;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 5px;
 }
 
 #tools-drawer #drawing-tools li > span {
@@ -124,34 +134,31 @@ h1, h2, h3 {
     width: var(--square-size);
     height: var(--square-size);
     line-height: 43px;
-    border-radius: 50%;
+    padding: 8px;
     overflow: visible;
     cursor: pointer;
 
     transition: var(--tool-color-transition),
-                background 400ms var(--tool-color-transition-type),
+                background 100ms var(--tool-color-transition-type),
                 border-radius 100ms var(--tool-color-transition-type);
     transition-delay: 100ms;
 }
 #tools-drawer #drawing-tools li > span:hover {
-    border-radius: 5px;
-    background: var(--page-background);
     color: var(--tool-hover-color);
     
     transition: var(--tool-color-transition),
-                background 100ms var(--tool-color-transition-type),
+                background 80ms var(--tool-color-transition-type),
                 border-radius 400ms var(--tool-color-transition-type);
 }
 #tools-drawer #drawing-tools li > span:hover > * {
     pointer-events: none;
 }
 #tools-drawer #drawing-tools li > span[active] {
-    border-radius: 5px;
     color: var(--tool-hover-color);
-    background: var(--button-background-active);
+    background: #00000051;
     
     transition: var(--tool-color-transition),
-                background 100ms var(--tool-color-transition-type),
+                background 80ms var(--tool-color-transition-type),
                 border-radius 400ms var(--tool-color-transition-type);
 }
 
@@ -176,13 +183,6 @@ h1, h2, h3 {
                 width   200ms ease,
                 padding 200ms ease;
 }
-#tools-drawer #drawing-tools li > span:hover::before {
-    left: 55px;
-    opacity: 1;
-    content: attr(tag);
-    width: fit-content;
-    padding: 0 5px;
-}
 
 #tools-drawer #drawing-tools li > span#tool-tile {
     overflow: hidden;
@@ -191,6 +191,7 @@ h1, h2, h3 {
     width: var(--square-size);
     height: var(--square-size);
     display: inline-block;
+    box-shadow: #00000051 0 0 0 2px;
 
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
@@ -412,11 +413,11 @@ label.file-input-span:active {
     overflow: auto;
     text-align: center;
     resize: vertical;
-    height: 48px;
+    height: 148px;
     padding-top: 2px;
-    min-height: 48px;
+    min-height: 148px;
     max-height: 498px;
-    background: linear-gradient(to left, var(--page-background) 24px, var(--page-background-secondary) 10px);
+    background: linear-gradient(to left, var(--page-background) 12px, var(--page-background-secondary) 10px);
 }
 
 #palette-label-container > div.palette-label .palette-label-body::-webkit-resizer {

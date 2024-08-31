@@ -45,6 +45,7 @@
 }
 .multi-drawer > .multi-drawer-bookmarks > button.drawer-bookmark.drawer-bookmark-focused {
     background: var(--drawer-background);
+    color: var(--button-color-hover);
 }
 .multi-drawer > .multi-drawer-bookmarks > button.drawer-bookmark.drawer-bookmark-focused:before,
 .drawer > button.drawer-bookmark:before {

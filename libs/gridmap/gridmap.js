@@ -289,6 +289,10 @@ class GridMapHandler {
         let gridMapInstance = this.getElementGridMapInstance(element);
         let gridMapCursorPos;
         let tileRelativePos = gridMapInstance.getTilePos(event.offsetX, event.offsetY);
+        let layer = document.getElementById("tool-layer")
+                            .getElementsByTagName("input")[0].value;
+        // let layer = 1;
+        
         switch(type) {
             case "move":
                 gridMapCursorPos = {
@@ -346,16 +350,12 @@ class GridMapHandler {
                 else if(GridMapHandler._cursorHolder.mode === 1
                      && GlobalSpritePaletteHolder._holdTile
                 ) {
-                    let layer = document.getElementById("tool-layer")
-                                        .getElementsByTagName("input")[0].value;
                     gridMapInstance.newTile(
                         tileRelativePos.x, tileRelativePos.y, layer,
                         GlobalSpritePaletteHolder._holdTile.getAttribute("style")
                     );
                 }
                 else if(GridMapHandler._cursorHolder.mode === -1) {
-                    let layer = document.getElementById("tool-layer")
-                                        .getElementsByTagName("input")[0].value;
                     gridMapInstance.delTile(tileRelativePos.x, tileRelativePos.y, layer);
                 }
                 else if(GridMapHandler._cursorHolder.mode === 2) {
@@ -395,9 +395,6 @@ class GridMapHandler {
                 }
                 else if(GridMapHandler._cursorHolder.mode === 2) {
                     if(GlobalSpritePaletteHolder._holdTile) {
-                        let layer = document.getElementById("tool-layer")
-                                            .getElementsByTagName("input")[0].value;
-                        
                         let lowerX = GridMapHandler._selectorHolder.x2;
                         let biggerX = GridMapHandler._selectorHolder.x1;
                         if(GridMapHandler._selectorHolder.x1 < GridMapHandler._selectorHolder.x2) {

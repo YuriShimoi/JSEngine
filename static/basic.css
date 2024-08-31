@@ -52,6 +52,7 @@ input {
 button {
     transition: background ease 150ms, color ease 150ms;
 }
+input:focus,
 button:hover {
     background: var(--button-background-hover);
     color: var(--button-color-hover);
