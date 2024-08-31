@@ -37,11 +37,14 @@
     border: 1px solid var(--drawer-border-color);
     border-radius: 3px;
 
-    background: var(--drawer-background);
+    background: var(--drawer-border-color);
     font-size: medium;
     font-family: monospace;
     text-align: center;
     cursor: pointer;
+}
+.multi-drawer > .multi-drawer-bookmarks > button.drawer-bookmark.drawer-bookmark-focused {
+    background: var(--drawer-background);
 }
 .multi-drawer > .multi-drawer-bookmarks > button.drawer-bookmark.drawer-bookmark-focused:before,
 .drawer > button.drawer-bookmark:before {
@@ -52,6 +55,9 @@
 .multi-drawer[unclosable] > .multi-drawer-bookmarks > button.drawer-bookmark:before,
 .drawer[unclosable] > button.drawer-bookmark:before {
     content: var(--closed);
+}
+.multi-drawer > .multi-drawer-bookmarks > button.drawer-bookmark.bookmark-iconed:before {
+    content: "";
 }
 
 .multi-drawer.drawer-left > .drawer,

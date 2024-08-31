@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="static/basic.css">
         <script src="static/basic.js"></script>
 
+        <!-- EXTERNAL LIBS -->
+        <script src="https://kit.fontawesome.com/2f88d7703e.js" crossorigin="anonymous"></script>
 
         <!-- INTERNAL LIBS -->
         <script src="libs/wakeupassist/wakeupassist.js"></script>
@@ -46,19 +48,28 @@
                     <li><span id="tool-layer" tag="Layer" active><input type="number" min="0" max="99" value="1"></span></li>
                     <li><span id="tool-visibility" tag="Visibility" active></span></li>
                     <hr>
-                    <li><span id="tool-move" class="draw-tool" tag="Cursor" mode="0" active>☩</span></li>
-                    <li><span id="tool-pen" class="draw-tool" tag="Pencil" mode="1">⇗</span></li>
-                    <li><span id="tool-pen" class="draw-tool" tag="Eraser" mode="-1">×</span></li>
-                    <li><span id="tool-area" class="draw-tool" tag="Area" mode="2">▧</span></li>
+                    <li><span id="tool-move" class="draw-tool" tag="Cursor" mode="0" active><i class="fa-solid fa-up-down-left-right"></i></span></li>
+                    <li><span id="tool-pen" class="draw-tool" tag="Pencil" mode="1"><i class="fa-solid fa-pencil"></i></span></li>
+                    <li><span id="tool-pen" class="draw-tool" tag="Eraser" mode="-1"><i class="fa-solid fa-eraser"></i></span></li>
+                    <li><span id="tool-area" class="draw-tool" tag="Area" mode="2"><i class="fa-solid fa-vector-square"></i></span></li>
                 </ul>
                 
             </div>
 
             <div id="page-drawers" class="multi-drawer drawer-left drawer-closed">
                 <div class="multi-drawer-bookmarks">
-                    <button class="drawer-bookmark" for="file-drawer" style="--opened:'↩';--closed:'Fls'"></button>
-                    <button class="drawer-bookmark" for="palette-drawer" style="--opened:'↩';--closed:'Plt'"></button>
-                    <button class="drawer-bookmark" for="export-drawer" style="--opened:'↩';--closed:'Exp'"></button>
+                    <button class="drawer-bookmark bookmark-iconed" for="file-drawer" style="--opened:'↩';">
+                        <i class="fa-solid fa-paste"></i>
+                    </button>
+                    <button class="drawer-bookmark bookmark-iconed" for="palette-drawer" style="--opened:'↩';">
+                        <i class="fa-solid fa-swatchbook"></i>
+                    </button>
+                    <button class="drawer-bookmark bookmark-iconed" for="layer-drawer" style="--opened:'↩';">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </button>
+                    <button class="drawer-bookmark bookmark-iconed" for="export-drawer" style="--opened:'↩';">
+                        <i class="fa-solid fa-download"></i>
+                    </button>
                 </div>
                 
                 <div class="drawer" id="file-drawer">
@@ -113,6 +124,10 @@
                     </div>
                 </div>
 
+                <div class="drawer" id="layer-drawer">
+                    <h3>Layers</h3>
+                </div>
+
                 <div class="drawer" id="export-drawer">
                     <h3>Exporting</h3>
                     <button class="btn-block" style="margin-bottom:5px" disabled>Full Image</button>
@@ -124,7 +139,7 @@
                 </div>
             </div>
 
-            <button id="dark-theme"></button>
+            <button id="dark-theme"><i class="fa-solid fa-circle-half-stroke"></i></button>
         </div>
     </body>
 </html>

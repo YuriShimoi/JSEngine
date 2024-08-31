@@ -1,7 +1,7 @@
 [dark-theme="true"] {
     --hr-color: #444;
     --page-background: #222;
-    --page-background-secondary: #1a1a1a;
+    --page-background-secondary: #191919;
     --page-color: #fff;
     --tool-color: #777;
     --tool-hover-color: #fff;
@@ -18,9 +18,9 @@
     --drawer-border-color: #090909;
     
     --gridmap-primary-black: #eee;
-    --gridmap-primary-gray: #090909;
+    --gridmap-primary-gray: #555555;
     --gridmap-secondary-gray: #777;
-    --gridmap-primary-white: #151515;
+    --gridmap-primary-white: #171717;
     --gridmap-secondary-white: var(--page-background-secondary);
     --gridmap-highlight: #0051ff;
     --gridmap-placehold-color: transparent;

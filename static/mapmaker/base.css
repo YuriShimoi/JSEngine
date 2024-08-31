@@ -45,7 +45,6 @@ h1, h2, h3 {
 
 
 #dark-theme {
-    filter: saturate(0);
     position: absolute;
     right: 5px;
     top: 5px;
@@ -56,14 +55,6 @@ h1, h2, h3 {
     padding: 0;
     font-size: 18px;
     cursor: pointer;
-}
-#dark-theme:before {
-    filter: brightness(0.3);
-    content: "🌙";
-}
-#dark-theme.dark-active:before {
-    filter: brightness(1.6);
-    content: "🌕";
 }
 
 
@@ -150,6 +141,9 @@ h1, h2, h3 {
     transition: var(--tool-color-transition),
                 background 100ms var(--tool-color-transition-type),
                 border-radius 400ms var(--tool-color-transition-type);
+}
+#tools-drawer #drawing-tools li > span:hover > * {
+    pointer-events: none;
 }
 #tools-drawer #drawing-tools li > span[active] {
     border-radius: 5px;
