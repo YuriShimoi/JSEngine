@@ -319,7 +319,9 @@ class GridMapHandler {
                     };
                     gridMapInstance.move(cursorNewPos.x, cursorNewPos.y);
                 }
-                else if(GridMapHandler._cursorHolder.mode === 2 && GridMapHandler._selectorHolder.x1 && GridMapHandler._selectorHolder.y1) {
+                else if(GridMapHandler._cursorHolder.mode === 2
+                        && GridMapHandler._selectorHolder.x1 !== null
+                        && GridMapHandler._selectorHolder.y1 !== null) {
                     GridMapHandler._selectorHolder.x2 = event.offsetX - (event.offsetX % gridMapInstance._zoom);
                     GridMapHandler._selectorHolder.y2 = event.offsetY - (event.offsetY % gridMapInstance._zoom);
 
@@ -396,7 +398,9 @@ class GridMapHandler {
                     GridMapHandler._cursorHolder.y = null;
                 }
                 else if(GridMapHandler._cursorHolder.mode === 2) {
-                    if(GlobalSpritePaletteHolder._holdTile || clickType === 2) {
+                    if((GlobalSpritePaletteHolder._holdTile || clickType === 2)
+                        && GridMapHandler._selectorHolder.x1 !== null
+                        && GridMapHandler._selectorHolder.y1 !== null) {
                         let lowerX = GridMapHandler._selectorHolder.x2;
                         let biggerX = GridMapHandler._selectorHolder.x1;
                         if(GridMapHandler._selectorHolder.x1 < GridMapHandler._selectorHolder.x2) {

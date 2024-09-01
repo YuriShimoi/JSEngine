@@ -196,17 +196,23 @@ class GlobalSpritePaletteHolder {
 
     static click(tile, event=null) {
         let parentWindow = this._internal.getParentWindow(tile);
-        if(this._holdTile === null) {
-            if(parentWindow.getAttribute("palette-select") === "false")
-                this._internal.clear(tile);
-            else
-                this.hold(tile);
+
+        if(tile.getAttribute('style')) {
+            if(this._holdTile === null) {
+                if(parentWindow.getAttribute("palette-select") === "false")
+                    this._internal.clear(tile);
+                else
+                    this.hold(tile);
+            }
+            else {
+                if(parentWindow.getAttribute("palette-draw") === "false")
+                    this.hold(tile);
+                else
+                    this._internal.draw(tile);
+            }
         }
         else {
-            if(parentWindow.getAttribute("palette-draw") === "false")
-                this.hold(tile);
-            else
-                this._internal.draw(tile);
+            this.clear(tile);
         }
 
         GlobalSpritePaletteHolder._triggerRegister.forEach(f => f(event));
