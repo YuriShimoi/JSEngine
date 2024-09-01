@@ -69,8 +69,8 @@ class SpritePalette {
         static bindTileEvents(parent) {
             let bindTiles = parent.getElementsByClassName("sprite-palette-tile");
             for(let bdt = 0; bdt < bindTiles.length; bdt++) {
-                bindTiles[bdt].addEventListener("click", () => {
-                    GlobalSpritePaletteHolder.click(bindTiles[bdt]);
+                bindTiles[bdt].addEventListener("click", (event) => {
+                    GlobalSpritePaletteHolder.click(bindTiles[bdt], event);
                 });
             }
         }
@@ -160,10 +160,20 @@ class SpritePalette {
 
         return plt_config;
     }
+
+    getFirstEmpty() {
+        if(this._instance) {
+            let instaceTiles = this._instance.querySelectorAll('.sprite-palette-tile');
+            for(let itile of instaceTiles) {
+                if(!itile.getAttribute('style')) return itile;
+            }
+        }
+    }
 }
 
 class GlobalSpritePaletteHolder {
     static _holdTile = null;
+    static _lastHoldTile = null;
     static _holdPallete = null;
     static _triggerRegister = [];
     static _internal = class InternalGlobalSpritePaletteHolder {
@@ -184,7 +194,7 @@ class GlobalSpritePaletteHolder {
         }
     }
 
-    static click(tile) {
+    static click(tile, event=null) {
         let parentWindow = this._internal.getParentWindow(tile);
         if(this._holdTile === null) {
             if(parentWindow.getAttribute("palette-select") === "false")
@@ -199,18 +209,20 @@ class GlobalSpritePaletteHolder {
                 this._internal.draw(tile);
         }
 
-        GlobalSpritePaletteHolder._triggerRegister.forEach(f => f());
+        GlobalSpritePaletteHolder._triggerRegister.forEach(f => f(event));
     }
 
     static hold(tile) {
         if(this._holdTile == tile) {
+            this._lastHoldTile = this._holdTile;
             this._holdTile.classList.remove("sprite-palette-holder");
             this._holdTile = null;
             this._holdPallete = null;
         }
         else {
-            if(this._holdTile != null)
+            if(this._holdTile != null) {
                 this._holdTile.classList.remove("sprite-palette-holder");
+            }
             this._holdTile = tile;
             this._holdTile.classList.add("sprite-palette-holder");
             this._holdPallete = this._internal.getParentWindow(tile).parentElement.parentElement.id;
@@ -218,6 +230,7 @@ class GlobalSpritePaletteHolder {
     }
 
     static clear() {
+        this._lastHoldTile = this._holdTile;
         this._holdTile = null;
         this._holdPallete = null;
         let tile_holder_list = document.querySelectorAll(".sprite-palette-container .sprite-palette-tile.sprite-palette-holder");

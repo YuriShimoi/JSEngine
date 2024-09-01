@@ -260,7 +260,7 @@ label.file-input-span {
     color: var(--input-color);
     border-radius: 1px;
 
-    width: calc(100% - 2px);
+    width: 26px;
     height: 25px;
     line-height: 27px;
     padding: 0;
@@ -295,82 +295,89 @@ label.file-input-span:active {
     align-items: center;
 }
 
-#palette-container > #palette-window {
+#palette-window {
     width: 70%;
     max-width: 700px;
     max-height: 700px;
 }
 
-#palette-container > #palette-window > header {
+#palette-window > header {
     margin: -10px;
     padding: 5px 10px;
 }
-#palette-container > #palette-window > header > button {
+#palette-window > header > button {
     font-size: large;
     font-weight: bold;
     padding: 0 5px;
     margin: 5px 0 10px 5px;
 }
 
-#palette-container > #palette-window > #palette-form-config {
+#palette-form-config {
     display: flex;
     width: 100%;
 }
-#palette-container > #palette-window > #palette-form-config > input {
+#palette-form-config > input {
     flex: 1;
 }
-#palette-container > #palette-window > #palette-form-config > span.palette-form-span {
+#palette-form-config span.palette-form-span,
+#palette-window > .palette-window-grid-container span.palette-form-span {
     max-width: fit-content;
     margin: 0 5px;
     font-size: 15px;
     line-height: 28px;
 }
-#palette-container > #palette-window > #palette-form-config > input#palette-form-name {
+#palette-form-config input#palette-form-name {
     margin-right: 10px;
 }
-#palette-container > #palette-window > #palette-form-config > input#palette-form-x,
-#palette-container > #palette-window > #palette-form-config > input#palette-form-y {
-    max-width: 27px;
+#palette-window > .palette-window-grid-container input#palette-form-x,
+#palette-window > .palette-window-grid-container input#palette-form-y {
+    max-width: 30px;
+    padding: 0 6px;
     text-align: right;
 }
+#palette-form-config > div {
+    display: flex;
+}
+#palette-form-config > div label.file-input-span {
+    border-right: none;
+}
 
-#palette-container > #palette-window > .palette-window-grid-container {
+#palette-window > .palette-window-grid-container {
     display: flex;
     width: 100%;
     min-height: 350px;
     height: 60vh;
     max-height: 500px;
     column-gap: 10px;
-    margin-top: 20px;
 }
-#palette-container > #palette-window > .palette-window-grid-container > div {
+#palette-window > .palette-window-grid-container > div {
     flex: 1;
     max-width: calc(100% - 275px);
 }
-#palette-container > #palette-window > .palette-window-grid-container > div > .palette-window-grid {
+#palette-window > .palette-window-grid-container > div > .palette-window-grid {
     height: calc(100% - 33px);
     background: var(--page-background);
     margin-top: 5px;
 }
-#palette-container > #palette-window > .palette-window-grid-container > div > .palette-window-grid-title {
+#palette-window > .palette-window-grid-container > div > .palette-window-grid-title {
     text-align: center;
     font-weight: 200;
     margin: 5px 0 -5px 0;
 }
-#palette-container > #palette-window > .palette-window-grid-container > div > #palette-form-texture {
+#palette-window > .palette-window-grid-container > div > #palette-form-texture {
     width: calc(100% - 26px);
     max-width: 200px;
     text-transform: capitalize;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-#palette-container > #palette-window > .palette-window-grid-container > div > .file-input-span {
+#palette-window > .palette-window-grid-container > div > .file-input-span {
     display: inline-block;
     width: 25px;
     margin: 0 -5px 0 0;
     transform: translateY(1px);
 }
-#palette-container > #palette-window > #palette-form-confirm {
+#palette-form-confirm {
     margin-top: 10px;
 }
 
@@ -403,7 +410,7 @@ label.file-input-span:active {
     background-color: transparent;
     color: var(--tool-color);
     cursor: pointer;
-    font-size: x-large;
+    font-size: large;
 }
 #palette-label-container > div.palette-label .palette-label-header .palette-label-button:hover {
     background-color: transparent;

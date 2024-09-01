@@ -36,12 +36,10 @@
     </head>
     <body>
         <div id="grid">
-            <div id="mapChess"></div>
+            <div id="mapChess" oncontextmenu="return false;"></div>
         </div>
         <div id="hud">
             <div id="tools-drawer">
-                <!-- <a href="index.html" onclick="return confirm('Leave page? You will lost all progress.')">◀</a>
-                <hr> -->
                 <ul id="drawing-tools">
                     <li><span id="tool-tile" tag="Tile"></span></li>
                     <!-- <li><span id="tool-layer" tag="Layer" active><input type="number" min="0" max="99" value="1"></span></li>
@@ -99,16 +97,18 @@
                                 <div id="palette-form-config">
                                     <span class="palette-form-span">Name</span>
                                     <input id="palette-form-name" type="text" placeholder="Palette Name">
-                                    <span class="palette-form-span">Grid Size</span>
-                                    <input id="palette-form-x" placeholder="x" value="24" type="number" max="512" min="4">
-                                    <span class="palette-form-span">×</span>
-                                    <input id="palette-form-y" placeholder="y" value="24" type="number" max="512" min="4">
+                                    <div>
+                                        <label for="file-input" class="file-input-span">+</label>
+                                        <select id="palette-form-texture"><option value="-1" selected disabled>Select Image</option></select>
+                                    </div>
                                 </div>
                                 
                                 <div class="palette-window-grid-container">
                                     <div>
-                                        <label for="file-input" class="file-input-span">+</label>
-                                        <select id="palette-form-texture"><option value="-1" selected disabled>Select Image</option></select>
+                                        <span class="palette-form-span">Grid Size</span>
+                                        <input id="palette-form-x" placeholder="x" value="16" type="number" max="1024" min="2">
+                                        <span class="palette-form-span">×</span>
+                                        <input id="palette-form-y" placeholder="y" value="16" type="number" max="1024" min="2">
                                         <div id="palette-loader-grid" class="palette-window-grid" palette-draw="false"></div>
                                     </div>
                                     <div style="min-width: 256px; max-width: 256px;">
@@ -129,11 +129,11 @@
 
                 <div class="drawer" id="export-drawer">
                     <h3>Exporting</h3>
-                    <button class="btn-block" style="margin-bottom:5px" disabled>Full Image</button>
+                    <!-- <button class="btn-block" style="margin-bottom:5px" disabled>Full Image</button>
                     <button class="btn-block" style="margin-bottom:5px" disabled>Condensed Tileset</button>
-                    <button class="btn-block" style="margin-bottom:5px" disabled>Spectate Map ▷</button>
+                    <button class="btn-block" style="margin-bottom:5px" disabled>Spectate Map ▷</button> -->
 
-                    <label for="code-export-area">Engine Code Export</label>
+                    <button class="btn-block" style="margin-bottom:5px" disabled>Generate Code Export</button>
                     <textarea id="code-export-area" placeholder="..." disabled></textarea>
                 </div>
             </div>

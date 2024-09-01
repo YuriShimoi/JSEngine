@@ -25,12 +25,14 @@ documentReady(() => {
             clearInterval(checkPalettes);
         }, 1);
     });
+    document.getElementById("palette-form-x").addEventListener("change", updatePaletteImages);
+    document.getElementById("palette-form-y").addEventListener("change", updatePaletteImages);
 
     let paletteImage = document.getElementById("palette-form-texture");
     paletteImage.addEventListener("change", () => { paletteTextureUpdate(paletteImage) });
 
     let paletteConfig = document.getElementById("palette-config-grid");
-    palette_on_config = new SpritePalette(paletteConfig, {x:24,y:24});
+    palette_on_config = new SpritePalette(paletteConfig, {x:16, y:16});
     palette_on_config.loadEmpty({x:5,y:10});
 
     document.getElementById("palette-form-confirm").addEventListener("click", () => {
@@ -38,7 +40,7 @@ documentReady(() => {
         togglePaletteWindow();
     });
 
-    GlobalSpritePaletteHolder.clickTrigger(() => {
+    GlobalSpritePaletteHolder.clickTrigger((event) => {
         let hold_parent = GlobalSpritePaletteHolder._holdTile?.parentElement?? null;
         while(hold_parent !== null
             && hold_parent.id != "palette-label-container"
@@ -68,6 +70,10 @@ documentReady(() => {
                 
                 document.getElementById("tool-tile").append(ttile);
             }
+            else if(event.detail === 2) {
+                // double-click on palette loader
+                palette_on_config.getFirstEmpty().setAttribute('style', GlobalSpritePaletteHolder._lastHoldTile.getAttribute('style'));
+            }
         }
     });
 
@@ -82,35 +88,6 @@ documentReady(() => {
             GridMapHandler._cursorHolder.mode = Number(e.target.getAttribute("mode"));
         };
     }
-
-    // let layer_input = document.getElementById("tool-layer")
-    //                           .getElementsByTagName("input")[0];
-    // layer_input.onkeydown = (e) => {
-    //     let li_val = Number(e.target.value);
-    //     let li_min = Number(e.target.min);
-    //     let li_max = Number(e.target.max);
-
-    //     let last_value = li_val;
-    //     if(li_val < li_min) last_value = li_min;
-    //     if(li_val > li_max) last_value = li_max;
-        
-    //     e.target.setAttribute("lastValue", last_value);
-    // };
-    // layer_input.onkeyup = (e) => {
-    //     let li_val = Number(e.target.value);
-    //     let li_min = Number(e.target.min);
-    //     let li_max = Number(e.target.max);
-    //     if(li_val < li_min || li_val > li_max) {
-    //         let li_last_value = Number(e.target.getAttribute("lastValue"));
-    //         e.target.value = li_last_value;
-    //     }
-    // };
-
-    // let visib_input = document.getElementById("tool-visibility");
-    // visib_input.onclick = () => {
-    //     visib_input.toggleAttribute("active");
-    //     // visib_input.hasAttribute("active");
-    // };
 });
 
 function togglePaletteWindow(plt=null, event=null) {
@@ -161,15 +138,15 @@ function newPaletteLabel(pltName=null) {
 
     let el_plt_edt = document.createElement("button");
     el_plt_edt.classList.add("palette-label-button");
-    el_plt_edt.innerHTML = "⇗";
-    el_plt_edt.style.fontSize = "large";
+    el_plt_edt.innerHTML = '<i class="fa-solid fa-pen-to-square" style="line-height: 29px;"></i>';
+    el_plt_edt.style.fontSize = "smaller";
     el_plt_edt.style.lineHeight = "26px";
     el_plt_edt.onclick = () => togglePaletteWindow(el_plt.id);
     el_plt_header.append(el_plt_edt);
 
     let el_plt_del = document.createElement("button");
     el_plt_del.classList.add("palette-label-button");
-    el_plt_del.innerHTML = "⨯";
+    el_plt_del.innerHTML = '<i class="fa-solid fa-xmark" style="line-height: 30px;"></i>';
     el_plt_del.onclick = () => deletePaletteWindow(el_plt.id);
     el_plt_header.append(el_plt_del);
     // HEADER

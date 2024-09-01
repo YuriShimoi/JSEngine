@@ -291,7 +291,8 @@ class GridMapHandler {
         let tileRelativePos = gridMapInstance.getTilePos(event.offsetX, event.offsetY);
         let layer = document.getElementById("tool-layer")
                             .getElementsByTagName("input")[0].value;
-        // let layer = 1;
+        let clickType = event.buttons || event.button;
+        // if(clickType) console.log(event);
         
         switch(type) {
             case "move":
@@ -309,7 +310,7 @@ class GridMapHandler {
                     }, 1);
                 }
 
-                if(GridMapHandler._cursorHolder.mode === 0
+                if((GridMapHandler._cursorHolder.mode === 0 || clickType === 4)
                 && GridMapHandler._cursorHolder.x !== null
                 && GridMapHandler._cursorHolder.y !== null) {
                     let cursorNewPos = {
@@ -342,18 +343,20 @@ class GridMapHandler {
                 }
                 break;
             case "down":
-                // console.log("click", tileRelativePos);
-                if(GridMapHandler._cursorHolder.mode === 0) {
+                if(GridMapHandler._cursorHolder.mode === 0 || clickType === 4) {
                     GridMapHandler._cursorHolder.x = event.offsetX;
                     GridMapHandler._cursorHolder.y = event.offsetY;
                 }
-                else if(GridMapHandler._cursorHolder.mode === 1
-                     && GlobalSpritePaletteHolder._holdTile
-                ) {
-                    gridMapInstance.newTile(
-                        tileRelativePos.x, tileRelativePos.y, layer,
-                        GlobalSpritePaletteHolder._holdTile.getAttribute("style")
-                    );
+                else if(GridMapHandler._cursorHolder.mode === 1) {
+                    if(clickType === 2) {
+                        gridMapInstance.delTile(tileRelativePos.x, tileRelativePos.y, layer);
+                    }
+                    else if(GlobalSpritePaletteHolder._holdTile) {
+                        gridMapInstance.newTile(
+                            tileRelativePos.x, tileRelativePos.y, layer,
+                            GlobalSpritePaletteHolder._holdTile.getAttribute("style")
+                        );
+                    }
                 }
                 else if(GridMapHandler._cursorHolder.mode === -1) {
                     gridMapInstance.delTile(tileRelativePos.x, tileRelativePos.y, layer);
@@ -388,13 +391,12 @@ class GridMapHandler {
 
                 if(GridMapHandler._cursorHolder.x === null && GridMapHandler._cursorHolder.y === null) break;
             case "up":
-                // console.log("unclick", tileRelativePos);
-                if(GridMapHandler._cursorHolder.mode === 0) {
+                if(GridMapHandler._cursorHolder.mode === 0 || clickType === 4) {
                     GridMapHandler._cursorHolder.x = null;
                     GridMapHandler._cursorHolder.y = null;
                 }
                 else if(GridMapHandler._cursorHolder.mode === 2) {
-                    if(GlobalSpritePaletteHolder._holdTile) {
+                    if(GlobalSpritePaletteHolder._holdTile || clickType === 2) {
                         let lowerX = GridMapHandler._selectorHolder.x2;
                         let biggerX = GridMapHandler._selectorHolder.x1;
                         if(GridMapHandler._selectorHolder.x1 < GridMapHandler._selectorHolder.x2) {
@@ -409,10 +411,15 @@ class GridMapHandler {
                         }
                         for(let py=lowerY; py <= biggerY; py+=gridMapInstance._zoom) {
                             for(let px=lowerX; px <= biggerX; px+=gridMapInstance._zoom) {
-                                gridMapInstance.newTile(
-                                    (px / gridMapInstance._zoom), (py / gridMapInstance._zoom), layer,
-                                    GlobalSpritePaletteHolder._holdTile.getAttribute("style")
-                                );
+                                if(clickType === 2) {
+                                    gridMapInstance.delTile((px / gridMapInstance._zoom), (py / gridMapInstance._zoom), layer);
+                                }
+                                else {
+                                    gridMapInstance.newTile(
+                                        (px / gridMapInstance._zoom), (py / gridMapInstance._zoom), layer,
+                                        GlobalSpritePaletteHolder._holdTile.getAttribute("style")
+                                    );
+                                }
                             }
                         }
                     }
